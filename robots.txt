@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://astravconsulting.com/sitemap.xml
+Sitemap: https://www.astravconsulting.com/sitemap.xml
