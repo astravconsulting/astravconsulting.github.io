@@ -57,6 +57,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" defer />
   <link rel="stylesheet" href="styles.css" defer />
+
 </head>
 <body>
 
@@ -145,6 +146,288 @@
     <span class="plat-item"><span class="plat-dot"></span>Azure</span>
   </div>
 </div>
+
+<!-- CAMPAIGN CAROUSEL -->
+<section id="campaign-carousel">
+  <div class="campaign-header">
+    <div class="tag">Why Astrav</div>
+    <h2 class="sec-title">Built for enterprises<br /><span class="grad">that demand more</span></h2>
+  </div>
+
+  <div class="carousel-stage">
+    <!-- Cards -->
+    <div class="card-deck" id="cardDeck">
+      <div class="camp-card" data-index="0">
+        <img src="images/1.png" alt="Free Security Assessment – Identify gaps in your CDN and API posture" />
+      </div>
+      <div class="camp-card" data-index="1">
+        <img src="images/2.png" alt="Deep Technical Integration – From WAF tuning to API discovery" />
+      </div>
+      <div class="camp-card" data-index="2">
+        <img src="images/3.png" alt="Cross-Platform Flexibility – Shift security focus instantly" />
+      </div>
+      <div class="camp-card" data-index="3">
+        <img src="imgages/4.png" alt="Agnostic Security. Zero Lock-In." />
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="carousel-arrow arrow-prev" id="arrowPrev" aria-label="Previous">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="carousel-arrow arrow-next" id="arrowNext" aria-label="Next">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <!-- Dots -->
+  <div class="carousel-dots" id="carouselDots">
+    <button class="dot active" data-dot="0"></button>
+    <button class="dot" data-dot="1"></button>
+    <button class="dot" data-dot="2"></button>
+    <button class="dot" data-dot="3"></button>
+  </div>
+</section>
+
+<style>
+/* ── CAROUSEL SECTION ───────────────────────────── */
+#campaign-carousel {
+  padding: 3rem 2rem 3.5rem;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign-header {
+  margin-bottom: 2rem;
+}
+
+.carousel-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+/* ── CARD DECK ─────────────────────────────────── */
+.card-deck {
+  position: relative;
+  width: 280px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.camp-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.5s ease,
+              opacity 0.5s ease,
+              filter 0.5s ease;
+  will-change: transform;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.camp-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* Card states: active, left-1, left-2, right-1, right-2, hidden */
+.camp-card[data-state="active"] {
+  transform: translateX(0) scale(1) rotateY(0deg);
+  z-index: 10;
+  opacity: 1;
+  filter: brightness(1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(99,179,237,0.15);
+}
+.camp-card[data-state="right-1"] {
+  transform: translateX(210px) scale(0.82) rotateY(-12deg);
+  z-index: 7;
+  opacity: 0.72;
+  filter: brightness(0.65);
+}
+.camp-card[data-state="right-2"] {
+  transform: translateX(320px) scale(0.68) rotateY(-18deg);
+  z-index: 4;
+  opacity: 0.4;
+  filter: brightness(0.45);
+}
+.camp-card[data-state="left-1"] {
+  transform: translateX(-210px) scale(0.82) rotateY(12deg);
+  z-index: 7;
+  opacity: 0.72;
+  filter: brightness(0.65);
+}
+.camp-card[data-state="left-2"] {
+  transform: translateX(-320px) scale(0.68) rotateY(18deg);
+  z-index: 4;
+  opacity: 0.4;
+  filter: brightness(0.45);
+}
+.camp-card[data-state="hidden"] {
+  transform: translateX(0) scale(0.55);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── ARROWS ───────────────────────────────────── */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  z-index: 20;
+  backdrop-filter: blur(6px);
+}
+.carousel-arrow:hover {
+  background: rgba(99,179,237,0.18);
+  border-color: rgba(99,179,237,0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+.arrow-prev { left: 0; }
+.arrow-next { right: 0; }
+
+/* ── DOTS ─────────────────────────────────────── */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2.5rem;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, width 0.3s;
+  padding: 0;
+}
+.dot.active {
+  background: #63b3ed;
+  width: 28px;
+  border-radius: 4px;
+  transform: none;
+}
+
+/* ── RESPONSIVE ───────────────────────────────── */
+@media (max-width: 700px) {
+  .card-deck { width: 220px; height: 390px; }
+  .camp-card { width: 220px; height: 390px; }
+  .camp-card[data-state="right-1"] { transform: translateX(155px) scale(0.82) rotateY(-12deg); }
+  .camp-card[data-state="right-2"] { transform: translateX(240px) scale(0.68) rotateY(-18deg); }
+  .camp-card[data-state="left-1"]  { transform: translateX(-155px) scale(0.82) rotateY(12deg); }
+  .camp-card[data-state="left-2"]  { transform: translateX(-240px) scale(0.68) rotateY(18deg); }
+  .arrow-prev { left: -4px; }
+  .arrow-next { right: -4px; }
+}
+</style>
+
+<script>
+(function(){
+  const TOTAL = 4;
+  let current = 0;
+  let autoTimer;
+
+  const cards = Array.from(document.querySelectorAll('.camp-card'));
+  const dots  = Array.from(document.querySelectorAll('.dot'));
+
+  function mod(n, m){ return ((n % m) + m) % m; }
+
+  function stateFor(cardIdx, active){
+    const diff = mod(cardIdx - active, TOTAL);
+    if(diff === 0) return 'active';
+    if(diff === 1) return 'right-1';
+    if(diff === 2) return 'right-2';
+    if(diff === TOTAL - 1) return 'left-1';
+    if(diff === TOTAL - 2) return 'left-2';
+    return 'hidden';
+  }
+
+  function render(){
+    cards.forEach((c, i) => c.dataset.state = stateFor(i, current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function go(dir){
+    current = mod(current + dir, TOTAL);
+    render();
+    resetAuto();
+  }
+
+  document.getElementById('arrowPrev').addEventListener('click', () => go(-1));
+  document.getElementById('arrowNext').addEventListener('click', () => go(1));
+  dots.forEach(d => d.addEventListener('click', () => {
+    current = +d.dataset.dot; render(); resetAuto();
+  }));
+
+  // Click side cards to advance
+  cards.forEach((c, i) => {
+    c.addEventListener('click', () => {
+      const state = c.dataset.state;
+      if(state === 'right-1' || state === 'right-2') go(1);
+      else if(state === 'left-1' || state === 'left-2') go(-1);
+    });
+  });
+
+  // Touch / drag swipe
+  let startX = null;
+  const deck = document.getElementById('cardDeck');
+  deck.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  deck.addEventListener('touchend', e => {
+    if(startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    startX = null;
+  });
+  deck.addEventListener('mousedown', e => { startX = e.clientX; });
+  deck.addEventListener('mouseup', e => {
+    if(startX === null) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    startX = null;
+  });
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => go(1), 4000);
+  }
+
+  render();
+  resetAuto();
+})();
+</script>
 
 <!-- PRACTICE AREAS OVERVIEW -->
 <section id="practices">
