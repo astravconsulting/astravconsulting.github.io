@@ -25,7 +25,7 @@ body {
   background: var(--navy);
   color: var(--off-white);
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -41,8 +41,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4rem;
-  height: 84px;
+  padding: 0 3rem;
+  height: 68px;
   background: rgba(5,14,31,0.92);
   backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
@@ -89,7 +89,7 @@ nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
 nav a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 500;
   transition: color 0.2s;
 }
@@ -153,7 +153,7 @@ nav a:hover, nav a.active { color: var(--white); }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 9rem 4rem 6rem;
+  padding: 6rem 4rem 4rem;
   overflow: hidden;
 }
 
@@ -198,10 +198,10 @@ nav a:hover, nav a.active { color: var(--white); }
   border: 1px solid rgba(26,111,255,0.3);
   border-radius: 100px;
   padding: 0.4rem 1rem 0.4rem 0.6rem;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--blue-lt);
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   position: relative; z-index: 2;
   animation: fadeUp 0.7s ease both;
 }
@@ -232,11 +232,11 @@ h1 .grad {
 }
 
 .hero-sub {
-  margin-top: 1.75rem;
-  font-size: 1.1rem;
+  margin-top: 1.1rem;
+  font-size: 1.15rem;
   color: var(--muted);
   max-width: 600px;
-  line-height: 1.85;
+  line-height: 1.75;
   font-weight: 400;
   position: relative; z-index: 2;
   animation: fadeUp 0.7s 0.2s ease both;
@@ -245,7 +245,7 @@ h1 .grad {
 .hero-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 2.75rem;
+  margin-top: 1.75rem;
   justify-content: center;
   position: relative; z-index: 2;
   animation: fadeUp 0.7s 0.3s ease both;
@@ -254,7 +254,7 @@ h1 .grad {
 .hero-stats {
   display: flex;
   gap: 0;
-  margin-top: 5rem;
+  margin-top: 3rem;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -266,13 +266,13 @@ h1 .grad {
 }
 .stat-item {
   flex: 1;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.25rem;
   border-right: 1px solid var(--border);
   text-align: center;
 }
 .stat-item:last-child { border-right: none; }
 .stat-val {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: var(--white);
   letter-spacing: -0.03em;
@@ -283,8 +283,8 @@ h1 .grad {
   background-clip: text;
 }
 .stat-label {
-  margin-top: 0.4rem;
-  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
   color: var(--muted);
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -401,18 +401,18 @@ h1 .grad {
    SECTIONS
    ══════════════════════════════════════════════════════════════════════════ */
 
-section { padding: 7rem 4rem; }
+section { padding: 4.5rem 4rem; }
 
 .tag {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--blue-lt);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 .tag::before {
   content: '';
@@ -422,7 +422,7 @@ section { padding: 7rem 4rem; }
 }
 
 .sec-title {
-  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-size: clamp(2.1rem, 3.5vw, 3.1rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--white);
@@ -436,10 +436,10 @@ section { padding: 7rem 4rem; }
 }
 .sec-desc {
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
   max-width: 520px;
-  margin-top: 1rem;
-  line-height: 1.85;
+  margin-top: 0.75rem;
+  line-height: 1.8;
   font-weight: 400;
 }
 
@@ -558,9 +558,9 @@ section { padding: 7rem 4rem; }
 .approach-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  gap: 5rem;
   align-items: center;
-  margin-top: 4.5rem;
+  margin-top: 2.5rem;
 }
 
 .steps { display: flex; flex-direction: column; }
@@ -568,7 +568,7 @@ section { padding: 7rem 4rem; }
 .step {
   display: flex;
   gap: 1.5rem;
-  padding: 2rem 0;
+  padding: 1.4rem 0;
   border-bottom: 1px solid var(--border2);
   position: relative;
   cursor: default;
@@ -578,7 +578,7 @@ section { padding: 7rem 4rem; }
 .step:first-child { border-top: 1px solid var(--border2); }
 
 .step-num {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--blue-lt);
   letter-spacing: 0.1em;
@@ -588,13 +588,13 @@ section { padding: 7rem 4rem; }
   opacity: 0.7;
 }
 .step-title {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
   letter-spacing: -0.01em;
 }
-.step-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+.step-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
 
 /* ══════════════════════════════════════════════════════════════════════════
    PRACTICES / MODELS
@@ -605,38 +605,38 @@ section { padding: 7rem 4rem; }
 .practices-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .practice-card {
   background: var(--navy3);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: 2rem;
   transition: background 0.3s, border-color 0.3s;
 }
 .practice-card:hover { background: var(--panel); border-color: rgba(26,111,255,0.3); }
 
 .prac-icon {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
 }
 .prac-title {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   letter-spacing: -0.01em;
 }
 .prac-desc {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--muted);
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
 }
 .prac-link {
-  font-size: 0.875rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--blue-lt);
   text-decoration: none;
@@ -649,15 +649,15 @@ section { padding: 7rem 4rem; }
 .models-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .model-card {
   background: var(--navy3);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: 2rem;
   transition: background 0.3s, border-color 0.3s;
 }
 .model-card:hover { background: var(--panel); }
@@ -669,7 +669,7 @@ section { padding: 7rem 4rem; }
 
 .model-badge {
   display: inline-block;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -678,7 +678,7 @@ section { padding: 7rem 4rem; }
   border: 1px solid rgba(26,111,255,0.3);
   padding: 0.3rem 0.8rem;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .badge-featured {
   color: var(--teal);
@@ -690,24 +690,24 @@ section { padding: 7rem 4rem; }
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   letter-spacing: -0.01em;
 }
 .model-desc {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--muted);
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
 }
 
 .model-features {
   list-style: none;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .model-features li {
-  font-size: 0.825rem;
+  font-size: 0.95rem;
   color: var(--off-white);
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -1345,7 +1345,7 @@ section { padding: 7rem 4rem; }
 #contact-cta {
   position: relative;
   background: var(--navy2);
-  padding: 9rem 4rem;
+  padding: 5rem 4rem;
   text-align: center;
   overflow: hidden;
 }
@@ -1374,12 +1374,12 @@ section { padding: 7rem 4rem; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1rem;
 }
 .cta-label::before, .cta-label::after {
   content: '';
@@ -1394,7 +1394,7 @@ section { padding: 7rem 4rem; }
   letter-spacing: -0.03em;
   color: var(--white);
   line-height: 1.08;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .cta-title .grad {
   background: linear-gradient(90deg, var(--blue-lt), var(--teal));
@@ -1404,10 +1404,10 @@ section { padding: 7rem 4rem; }
 }
 
 .cta-desc {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--muted);
-  line-height: 1.85;
-  margin-bottom: 3rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
 }
 
 .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
