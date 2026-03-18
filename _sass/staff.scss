@@ -1,0 +1,58 @@
+// ── STAFF ────────────────────────────────────────────────────────────────────
+
+.staff {
+  padding: 0;
+  list-style: none;
+  @extend %flexbox;
+  @include flex-flow(wrap);
+  text-align: center;
+  gap: 1.5rem;
+
+  li {
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    background: $navy3;
+    border: 1px solid $border;
+    border-radius: 16px;
+    transition: background 0.3s, border-color 0.3s;
+
+    &:hover {
+      background: $panel;
+      border-color: rgba(26, 111, 255, 0.3);
+    }
+
+    @media #{$tablet} {
+      @include flex(1, 1, 45%);
+    }
+
+    @media #{$desktop} {
+      @include flex(1, 1, 29%);
+    }
+  }
+
+  .square-image {
+    width: 180px;
+    height: 180px;
+    border: 2px solid $blue;
+    box-shadow: 0 0 24px $blue-glow;
+
+    img {
+      border-radius: 200px;
+    }
+  }
+
+  .name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin-top: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .position {
+    color: $muted;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}

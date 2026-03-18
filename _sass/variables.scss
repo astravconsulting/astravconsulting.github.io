@@ -1,0 +1,26 @@
+// ── ASTRAV CONSULTING – DESIGN TOKENS ──────────────────────────────────────
+
+// Palette
+$navy:        #050e1f;
+$navy2:       #081429;
+$navy3:       #0b1a35;
+$panel:       #0e2040;
+$blue:        #1a6fff;
+$blue-lt:     #3d87ff;
+$blue-glow:   rgba(26, 111, 255, 0.18);
+$teal:        #00c2cb;
+$white:       #ffffff;
+$off-white:   #e8edf5;
+$muted:       #7a90b0;
+$border:      rgba(255, 255, 255, 0.08);
+$border2:     rgba(255, 255, 255, 0.05);
+
+// Legacy aliases (keep existing partials compiling)
+$brand-color:            $blue;
+$secondary-brand-color:  $blue;
+$middle-gradient-color:  mix($blue, $teal, 70%);
+
+// Breakpoints
+$tablet:    "(min-width: 450px)";
+$mid-point: "(min-width: 620px)";
+$desktop:   "(min-width: 768px)";

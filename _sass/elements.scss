@@ -1,0 +1,173 @@
+// ── BASE ELEMENTS ───────────────────────────────────────────────────────────
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: $navy;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $navy;
+  color: $off-white;
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  color: $blue-lt;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $teal;
+    text-decoration: none;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+h1 strong, h2 strong {
+  font-weight: 800;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: $white;
+  margin: 0;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: -0.03em;
+  color: $white;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.15;
+
+  strong {
+    background: linear-gradient(90deg, $blue-lt, $teal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $white;
+  margin: 1.25rem 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+p, address {
+  font-size: 1rem;
+  color: $muted;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+blockquote {
+  padding: 1.5rem 1.75rem;
+  margin: 0;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-style: italic;
+  color: $off-white;
+  border-left: 3px solid $blue;
+
+  .author {
+    display: block;
+    font-weight: 700;
+    margin: 0.75rem 0 0;
+    font-size: 0.85em;
+    font-style: normal;
+    color: $muted;
+  }
+
+  p {
+    display: inline;
+    color: $off-white;
+  }
+}
+
+blockquote:before {
+  color: $blue-lt;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.square-image {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  margin: 1.5rem auto 0;
+  position: relative;
+  border-radius: 200px;
+  border: 2px solid $border;
+
+  img {
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    width: 300px;
+  }
+}
+
+.page {
+  margin-bottom: 0;
+  padding-bottom: 5rem;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.editor-link {
+  display: none;
+  margin-top: 0;
+
+  .btn {
+    border: 0;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0;
+    cursor: pointer;
+    background-color: $blue;
+    color: $white;
+    box-shadow: 0 4px 16px $blue-glow;
+
+    &:hover {
+      background-color: $blue-lt;
+      color: $white;
+    }
+  }
+}

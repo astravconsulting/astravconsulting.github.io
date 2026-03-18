@@ -1,0 +1,24 @@
+- links:
+  - name: Services
+    link: /services/
+  - name: Managed Services
+    link: /managed-services/
+  - name: Advisory
+    link: /advisory/
+  - name: About
+    link: /about/
+  - name: Contact
+    link: /contact/
+- links:
+  - name: LinkedIn
+    link: https://in.linkedin.com/astravconsulting
+    new_window: true
+    social_icon: linkedin
+  - name: Twitter / X
+    link: https://x.com/officialastrav/
+    social_icon: twitter
+    new_window: true
+  - name: RSS
+    link: /feed.xml
+    social_icon: rss
+    new_window: false

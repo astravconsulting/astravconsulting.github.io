@@ -1,0 +1,219 @@
+// ── LAYOUT ──────────────────────────────────────────────────────────────────
+
+.container, .text-container {
+  margin: 0 auto;
+  position: relative;
+  padding: 0 20px;
+}
+
+.text-container {
+  max-width: 750px;
+}
+
+.container {
+  max-width: 1140px;
+
+  &.max-container {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+// ── HEADER / NAV WRAPPER ────────────────────────────────────────────────────
+
+header {
+  color: $white;
+  padding: 0;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  background: rgba(5, 14, 31, 0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid $border;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 3rem;
+    max-width: 100%;
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+    z-index: 1;
+    position: relative;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .company-name {
+    font-size: 1rem;
+    line-height: 1;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    img {
+      display: block;
+      width: auto;
+      height: 48px;
+      filter: drop-shadow(0 0 12px rgba(0, 194, 203, 0.4));
+      transition: filter 0.3s;
+
+      &:hover {
+        filter: drop-shadow(0 0 22px rgba(0, 194, 203, 0.7));
+      }
+    }
+  }
+}
+
+// ── CONTENT AREA ────────────────────────────────────────────────────────────
+
+.content {
+  background: $navy;
+  padding: 1px 0 0 0;
+  position: relative;
+}
+
+// ── SCREENSHOTS ─────────────────────────────────────────────────────────────
+
+.screenshot {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px $border;
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  background: $navy2;
+  padding: 20px 0 0 0;
+  position: relative;
+}
+
+// ── SECTIONS ────────────────────────────────────────────────────────────────
+
+section {
+  padding: 5rem 0;
+}
+
+section + section {
+  padding-top: 0;
+}
+
+.subtext {
+  margin-top: 0.6rem;
+  text-align: center;
+  color: $muted;
+  font-size: 1.1rem;
+}
+
+.cta {
+  margin: 3.5rem 0;
+}
+
+.page h2 {
+  text-align: center;
+}
+
+// ── FLEX CONTENT ROWS ───────────────────────────────────────────────────────
+
+@media #{$desktop} {
+  .flex {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .text, .image {
+      flex: 1;
+      padding: 0 2rem;
+    }
+  }
+
+  .content section:nth-child(even) .flex {
+    flex-direction: row-reverse;
+  }
+}
+
+// ── BUTTONS ─────────────────────────────────────────────────────────────────
+
+.button a,
+a.button {
+  display: inline-block;
+  background: $blue;
+  color: $white !important;
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  letter-spacing: -0.01em;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $blue-lt;
+    box-shadow: 0 0 32px rgba(26, 111, 255, 0.45);
+    transform: translateY(-2px);
+  }
+}
+
+.button.alt a,
+a.button.alt {
+  background: rgba(255,255,255,0.06);
+  color: $off-white !important;
+  border: 1px solid $border;
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: none;
+  }
+}
+
+// ── TAG LABEL ───────────────────────────────────────────────────────────────
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $blue-lt;
+  margin-bottom: 0.75rem;
+
+  &::before {
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: $blue-lt;
+    border-radius: 2px;
+  }
+}
+
+// ── RESPONSIVE ──────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  header .container {
+    padding: 0 1.25rem;
+  }
+
+  section {
+    padding: 4rem 1.25rem;
+  }
+}

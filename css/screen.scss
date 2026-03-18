@@ -1,0 +1,29 @@
+---
+---
+@import "mixins/flexbox";
+@import "mixins/columns";
+@import "variables";
+@import "elements";
+@import "landing-page";
+@import "layout";
+@import "pricing";
+@import "staff";
+@import "contact";
+@import "blog";
+@import "forms";
+@import "navigation";
+@import "footer";
+@import "cloudcannon";
+
+/* ── BODY OFFSET FOR FIXED HEADER ────────────────────────────────────────── */
+body > header + * {
+  /* push all page content below the 68px fixed nav */
+  /* .hero handles its own padding-top internally     */
+}
+
+/* Non-hero pages need top padding */
+.page,
+.blog,
+.contact-box {
+  padding-top: 6rem;
+}

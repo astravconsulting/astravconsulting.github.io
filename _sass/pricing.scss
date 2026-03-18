@@ -1,0 +1,92 @@
+// ── PRICING ──────────────────────────────────────────────────────────────────
+
+.plans {
+  @extend %flexbox;
+  @include flex-flow(wrap);
+  padding: 3rem 0 2rem;
+  gap: 1.5rem;
+
+  .plan {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    border: 1px solid $border;
+    border-radius: 16px;
+    background: $navy3;
+    width: 100%;
+    transition: background 0.3s, border-color 0.3s;
+
+    &:hover {
+      background: $panel;
+      border-color: rgba(26, 111, 255, 0.3);
+    }
+
+    .highlighted {
+      font-size: 1.2em;
+      color: $teal;
+    }
+
+    .pricing-cta {
+      padding: 0;
+
+      a {
+        display: block;
+        box-sizing: border-box;
+        padding: 1.25rem 0;
+        border-radius: 0 0 14px 14px;
+        border: 0;
+        background: $blue;
+        color: $white;
+        font-weight: 600;
+        transition: background 0.2s;
+
+        &:hover {
+          background: $blue-lt;
+        }
+      }
+    }
+
+    @media #{$desktop} {
+      flex: 1;
+    }
+
+    li {
+      border-top-right-radius: 14px;
+      border-top-left-radius: 14px;
+      padding: 1.25rem 0;
+
+      h3 {
+        padding: 0;
+        margin: 0;
+        color: $white;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.faq {
+  @media #{$desktop} {
+    @include columns(2);
+  }
+
+  color: $muted;
+
+  div {
+    break-inside: avoid;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid $border2;
+  }
+
+  dt {
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+    color: $off-white;
+  }
+
+  dd {
+    padding: 0;
+    margin: 0;
+  }
+}

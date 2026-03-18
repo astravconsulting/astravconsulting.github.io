@@ -1,0 +1,98 @@
+// ── NAVIGATION ──────────────────────────────────────────────────────────────
+
+.nav-open nav {
+  border-bottom: 1px solid $border;
+  padding: 0.75rem 0;
+
+  a {
+    display: block;
+  }
+
+  @media #{$mid-point} {
+    border: 0;
+    padding: 0;
+
+    a {
+      display: inline;
+    }
+  }
+}
+
+nav {
+  text-transform: none;
+  font-size: 0.95rem;
+  width: auto;
+
+  @media #{$mid-point} {
+    text-align: right;
+    position: static;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    margin: 0;
+    padding: 0.5rem 0;
+    border-bottom: none;
+    color: $muted;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: none;
+
+    @media #{$mid-point} {
+      display: inline;
+    }
+
+    &.nav-toggle {
+      display: inline;
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      border: 0;
+      color: $white;
+
+      @media #{$mid-point} {
+        display: none;
+      }
+
+      &:hover {
+        border: 0;
+        color: $teal;
+      }
+    }
+
+    &:hover,
+    &.active {
+      color: $white;
+      border-bottom: none;
+    }
+
+    // CTA button
+    &.highlight {
+      background: $blue;
+      color: $white !important;
+      padding: 0.55rem 1.35rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      border: none !important;
+
+      &:hover {
+        background: $blue-lt;
+        color: $white;
+        box-shadow: 0 0 24px rgba(26, 111, 255, 0.4);
+        border: none !important;
+      }
+    }
+  }
+}

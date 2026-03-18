@@ -1,0 +1,73 @@
+// ── FORMS ───────────────────────────────────────────────────────────────────
+
+.contact-form {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: $off-white;
+      margin-bottom: 0.5rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: $navy3;
+      border: 1px solid $border;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: $off-white;
+      font-family: inherit;
+      transition: border-color 0.2s, background 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: $blue;
+        background: rgba(26, 111, 255, 0.05);
+      }
+
+      &::placeholder {
+        color: $muted;
+        opacity: 0.6;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+  }
+}
+
+// Generic input / form reset
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea {
+  background: $navy3;
+  border: 1px solid $border;
+  border-radius: 8px;
+  color: $off-white;
+  font-family: inherit;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: $blue;
+  }
+}

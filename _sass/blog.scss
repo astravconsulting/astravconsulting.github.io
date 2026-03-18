@@ -1,0 +1,78 @@
+// ── BLOG ─────────────────────────────────────────────────────────────────────
+
+.blog-posts {
+  .post {
+    border-bottom: 1px solid $border2;
+    padding: 2rem 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .post-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+
+    a {
+      color: $white;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover { color: $blue-lt; }
+    }
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: $muted;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: $muted;
+    line-height: 1.75;
+  }
+}
+
+.post-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  h1, h2, h3 { color: $white; }
+
+  p { color: $muted; }
+
+  a { color: $blue-lt; }
+
+  pre {
+    background: $navy3;
+    border: 1px solid $border;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+  }
+
+  code {
+    background: $navy3;
+    border: 1px solid $border2;
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    font-size: 0.875em;
+    color: $teal;
+  }
+
+  blockquote {
+    border-left: 3px solid $blue;
+    padding: 1rem 1.5rem;
+    background: $navy2;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+}
