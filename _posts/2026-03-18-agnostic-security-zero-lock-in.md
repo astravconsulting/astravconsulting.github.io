@@ -12,7 +12,7 @@ In today’s complex digital landscape, organizations rely on multiple cloud and
 
 At Astrav Consulting, we take a different approach. Our professional services (PS) hours are platform-agnostic, giving you the flexibility to apply them across your infrastructure according to your unique requirements.
 
-![Agnostic Security, zero lock in](https://labs.google.com/pomelli_downloads/accounts/9dMb3bGeR4l6juVOVKvOEq/resources/b1BmBUsUIdZ0kziFPAb4Sy?authuser=0)
+![Agnostic Security, zero lock in](https://pbs.twimg.com/media/HDRMzOGbQAASfjN?format=jpg&name=large)
 
 ### Flexible PS Hours Across Platforms
 
