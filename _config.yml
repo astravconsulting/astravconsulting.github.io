@@ -1,24 +1,24 @@
 # ----
 # Site
 
-title: Hydra Template
-url: "https://proud-alligator.cloudvent.net"
+title: Astrav Consulting
+url: "https://www.astravconsulting.com"
 baseurl:
 google_analytics_key:
 google_maps_javascript_api_key:
 disqus_shortname:
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-logo: /logo.png
-description: Product marketing template for Jekyll.
+logo: /images/cropped_logo.png
+description: Astrav Provides professional services for CDN and Cloud security operations.
 author:
-  name:
-  email:
+  name: Astrav Consulting
+  email: info@astravconsulting.com
   twitter: OfficialAstrav # twitter username without the @ symbol
 social:
-  name: Hydra Template
+  name: Astrav Consulting
   links:
-    - https://github.com/CloudCannon/hydra-jekyll-template
+    - https://www.astravconsulting.com
 
 # -----
 # Build
