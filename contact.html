@@ -1,178 +1,207 @@
----
-title: Contact
-heading: Get in touch today
-description: We'd love to help you improve your sales.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6THZCSNKC3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6THZCSNKC3');
+  </script>
 
-map:
-  latitude: -45.8787605
-  longitude: 170.5027976
-  address: "1 George Street, Dunedin, New Zealand"
-  zoom: 13
----
-<div class="map" id="map"></div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Primary SEO -->
+  <title>Contact Astrav Consulting – Schedule a Security Consultation</title>
+  <meta name="description" content="Get in touch with Astrav Consulting to discuss your CDN, cloud, or API security needs. Schedule a free consultation with our security experts today." />
+  <meta name="keywords" content="contact Astrav Consulting, security consultation, CDN security consultation, book security assessment, cybersecurity consulting contact" />
+  <link rel="canonical" href="https://www.astravconsulting.com/contact.html" />
 
-<div class="contact-box">
-	<form action="{{ site.baseurl }}/contact-success/" method="post" class="contact-form">
-		<input type="hidden" name="_to" value="support@example.com" />
-		<input type="text" name="_gotcha" style="display: none;">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.astravconsulting.com/contact.html" />
+  <meta property="og:title" content="Contact Astrav Consulting – Schedule a Security Consultation" />
+  <meta property="og:description" content="Get in touch with Astrav Consulting to discuss your CDN, cloud, or API security needs. Schedule a free consultation with our security experts today." />
+  <meta property="og:site_name" content="Astrav Consulting" />
 
-		<label for="name">Full Name</label>
-		<input type="text" name="name" id="name" placeholder="Enter your name..." />
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Astrav Consulting – Schedule a Security Consultation" />
+  <meta name="twitter:description" content="Get in touch with Astrav Consulting to discuss your CDN, cloud, or API security needs. Schedule a free consultation with our security experts today." />
 
-		<label for="email">Email Address</label>
-		<input type="email" name="email" id="email" placeholder="Enter your email..." required />
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.astravconsulting.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Contact Astrav Consulting", "item": "https://www.astravconsulting.com/contact.html"}
+    ]
+  }
+  </script>
 
-		<label for="message">Message</label>
-		<textarea name="message" id="message" placeholder="Enter your message..."></textarea>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-		<input type="submit" value="Send Message" />
-	</form>
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">
+    <img src="logo.png" alt="Astrav Consulting" class="logo-img" />
+  </a>
+  <ul>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="managed-services.html">Managed Services</a></li>
+    <li><a href="advisory.html">Advisory</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta active">Get in Touch</a></li>
+  </ul>
+</nav>
 
-	<div class="contact-details">
-		<h3 class="editable">Address</h3>
-		<address><a target="_blank" href="https://www.google.com/maps/place/{{ page.map.address | url_encode }}">{{ page.map.address | replace: ", ", ", <br>" }}</a></address>
+<!-- PAGE HERO -->
+<section class="page-hero contact-hero">
+  <div class="orb orb-1"></div>
+  <div class="hero-grid"></div>
+  <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
+  <div class="page-hero-content">
+    <div class="tag">Get in Touch</div>
+    <h1>Let's talk about your<br /><span class="grad">security needs</span></h1>
+    <p class="hero-sub">Whether you're looking for a security assessment, need help with a CDN migration, or want to explore managed services — we're here to help.</p>
+  </div>
+</section>
 
-		<h3 class="editable">Email</h3>
-		<p><a href="mailto:support@example.com">support@example.com</a></p>
-	</div>
-</div>
+<!-- CONTACT FORM & INFO -->
+<section id="contact-main">
+  <div class="contact-layout">
+    <div class="contact-form-wrap">
+      <h2 class="form-title">Send us a message</h2>
+      <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 hours.</p>
 
-<script type="text/javascript">
-	window.mapData = {{ page.map | jsonify }};
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="b71aa640-18ab-472d-81a6-76a5fcc59ca4">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required />
+          </div>
+        </div>
 
-	function initMap() {
-		var myOptions = {
-			scrollwheel: false,
-			draggable: false,
-			panControl: false,
-			disableDefaultUI: true,
-			styles: [{
-				"featureType": "all",
-				"elementType": "labels.text.fill",
-				"stylers": [{
-					"saturation": 36
-				}, {
-					"color": "#000000"
-				}, {
-					"lightness": 40
-				}]
-			}, {
-				"featureType": "all",
-				"elementType": "labels.text.stroke",
-				"stylers": [{
-					"visibility": "on"
-				}, {
-					"color": "#000000"
-				}, {
-					"lightness": 16
-				}]
-			}, {
-				"featureType": "all",
-				"elementType": "labels.icon",
-				"stylers": [{
-					"visibility": "off"
-				}]
-			}, {
-				"featureType": "administrative",
-				"elementType": "geometry.fill",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 20
-				}]
-			}, {
-				"featureType": "administrative",
-				"elementType": "geometry.stroke",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 17
-				}, {
-					"weight": 1.2
-				}]
-			}, {
-				"featureType": "landscape",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 20
-				}]
-			}, {
-				"featureType": "poi",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 21
-				}]
-			}, {
-				"featureType": "road.highway",
-				"elementType": "geometry.fill",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 17
-				}]
-			}, {
-				"featureType": "road.highway",
-				"elementType": "geometry.stroke",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 29
-				}, {
-					"weight": 0.2
-				}]
-			}, {
-				"featureType": "road.arterial",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 18
-				}]
-			}, {
-				"featureType": "road.local",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 16
-				}]
-			}, {
-				"featureType": "transit",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 19
-				}]
-			}, {
-				"featureType": "water",
-				"elementType": "geometry",
-				"stylers": [{
-					"color": "#000000"
-				}, {
-					"lightness": 17
-				}]
-			}],
-			zoom: window.mapData.zoom,
-			maxZoom: window.mapData.zoom,
-			minZoom: window.mapData.zoom,
-			center: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude),
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		map = new google.maps.Map(document.getElementById("map"), myOptions);
-		marker = new google.maps.Marker({
-			map: map,
-			position: new google.maps.LatLng(window.mapData.latitude, window.mapData.longitude)
-		});
+        <div class="form-group">
+          <label for="email">Work Email *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
 
-		google.maps.event.addDomListener(window, "resize", function () {
-			map.setCenter(myOptions.center);
-		});
-	}
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ site.google_maps_javascript_api_key }}&amp;callback=initMap"></script>
+        <div class="form-group">
+          <label for="company">Company *</label>
+          <input type="text" id="company" name="company" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" />
+        </div>
+
+        <div class="form-group">
+          <label for="interest">I'm interested in *</label>
+          <select id="interest" name="interest" required>
+            <option value="">Select an option</option>
+            <option value="CDN Security &amp; Delivery">CDN Security &amp; Delivery</option>
+            <option value="Cloud Security &amp; Infrastructure">Cloud Security &amp; Infrastructure</option>
+            <option value="API Security">API Security</option>
+            <option value="Managed Security Services">Managed Security Services</option>
+            <option value="Security Assessment / Advisory">Security Assessment / Advisory</option>
+            <option value="Migration &amp; Transformation">Migration &amp; Transformation</option>
+            <option value="Other / Not Sure">Other / Not Sure</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Tell us about your project *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <!-- Hidden field to specify recipient -->
+        <input type="hidden" name="_replyto" value="info@astravconsulting.com" />
+        <input type="hidden" name="_subject" value="New Contact Form Submission - Astrav Consulting" />
+
+        <button type="submit" class="btn-primary form-submit">Send Message</button>
+      </form>
+    </div>
+
+    <div class="contact-info-wrap">
+      <div class="contact-info-card">
+        <div class="info-icon">✉️</div>
+        <h3>Email Us</h3>
+        <p><a href="mailto:info@astravconsulting.com">info@astravconsulting.com</a></p>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="info-icon">💼</div>
+        <h3>What to Expect</h3>
+        <ul class="expect-list">
+          <li>Response within 24 business hours</li>
+          <li>Initial consultation (no cost)</li>
+          <li>Tailored recommendations</li>
+          <li>Clear pricing &amp; timeline</li>
+        </ul>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="info-icon">🔒</div>
+        <h3>Your Privacy</h3>
+        <p style="font-size:0.85rem;color:var(--muted);">We respect your privacy and will never share your information with third parties. All consultations are confidential.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALTERNATE CONTACT -->
+<section id="alt-contact">
+  <div class="tag">Prefer Email?</div>
+  <h2 class="sec-title">You can also reach us<br /><span class="grad">directly</span></h2>
+  
+  <div class="alt-grid">
+    <div class="alt-card">
+      <h4>General Inquiries</h4>
+      <p><a href="mailto:info@astravconsulting.com">info@astravconsulting.com</a></p>
+    </div>
+    <div class="alt-card">
+      <h4>Managed Services</h4>
+      <p><a href="mailto:info@astravconsulting.com">info@astravconsulting.com</a></p>
+    </div>
+    <div class="alt-card">
+      <h4>Security Assessments</h4>
+      <p><a href="mailto:info@astravconsulting.com">info@astravconsulting.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="logo.png" alt="Astrav Consulting" class="footer-logo-img" />
+    <div>
+      <div class="footer-name">Astrav Consulting</div>
+      <div style="font-size:0.7rem;color:var(--muted);margin-top:0.1rem;letter-spacing:0.04em;">CDN · Cloud · API Security</div>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="managed-services.html">Managed Services</a></li>
+    <li><a href="advisory.html">Advisory</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 ASTRAV CONSULTING. ALL RIGHTS RESERVED.</div>
+</footer>
+
+</body>
+</html>
