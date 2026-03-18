@@ -6,15 +6,15 @@ categories:
 author_staff_member: robin
 ---
 
-## Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
+# Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
 
 In today’s complex digital landscape, organizations rely on multiple cloud and CDN providers—Akamai, Cloudflare, AWS, Azure, and more—to deliver high-performance, secure applications. However, traditional professional services offerings from these providers are often siloed: the hours you purchase can only be applied to their specific products, leaving you constrained and sometimes paying for unused services.
 
 At Astrav Consulting, we take a different approach. Our professional services (PS) hours are platform-agnostic, giving you the flexibility to apply them across your infrastructure according to your unique requirements.
 
-<img src=https://labs.google.com/pomelli_downloads/accounts/9dMb3bGeR4l6juVOVKvOEq/resources/b1BmBUsUIdZ0kziFPAb4Sy?authuser=0 alt="Agnostic Security, zero lock in" />
+![Agnostic Security, zero lock in](https://labs.google.com/pomelli_downloads/accounts/9dMb3bGeR4l6juVOVKvOEq/resources/b1BmBUsUIdZ0kziFPAb4Sy?authuser=0)
 
-## Flexible PS Hours Across Platforms
+### Flexible PS Hours Across Platforms
 
 With Astrav, your purchased PS hours are not locked to a single vendor. For example:
 
@@ -27,7 +27,7 @@ This flexibility empowers organizations to:
   - Avoid paying for unused vendor-specific hours
   - Maintain a centralized view of all PS hour consumption
 
-## Centralized Visibility for Better Decision-Making
+### Centralized Visibility for Better Decision-Making
 
 Astrav’s platform-agnostic model doesn’t just save costs—it provides complete visibility. By tracking and reporting your PS hours across all vendors, your teams can:
 
@@ -35,12 +35,13 @@ Astrav’s platform-agnostic model doesn’t just save costs—it provides compl
   - Understand which platforms consume the most support
   - Make data-driven decisions about future investments
 
-## Why Organizations Choose Astrav
+### Why Organizations Choose Astrav
 
   - Cost Efficiency: Avoid vendor lock-in and make every PS hour count
   - Agility: Reallocate hours between providers as your architecture evolves
   - Centralized Management: Gain a single pane of glass for all professional services usage
   - Expertise: Leverage Astrav’s cross-platform security and performance expertise
-## Conclusion
+
+### Conclusion
 
 Astrav Consulting redefines professional services in a multi-cloud, multi-CDN world. By offering flexible, agnostic PS hours, we enable organizations to reduce costs, maintain visibility, and ensure that their security and performance initiatives get the support they truly need—across any platform.
