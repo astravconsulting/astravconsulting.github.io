@@ -93,7 +93,7 @@ nav a {
   font-weight: 500;
   transition: color 0.2s;
 }
-nav a:hover, nav a.active { color:#004BAF; }
+nav a:hover, nav a.active { color:#042551; }
 
 .nav-cta {
   background: var(--blue) !important;
