@@ -1,14 +1,14 @@
 - links:
   - name: Services
-    link: /services/
+    link: /services.html
   - name: Managed Services
-    link: /managed-services/
+    link: /managed-services.html
   - name: Advisory
-    link: /advisory/
+    link: /advisory.html
   - name: About
-    link: /about/
+    link: /about-us.html
   - name: Contact
-    link: /contact/
+    link: /contact.html
 - links:
   - name: LinkedIn
     link: https://in.linkedin.com/astravconsulting
