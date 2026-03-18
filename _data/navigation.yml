@@ -1,20 +1,20 @@
 - name: Services
-  link: /services/
+  link: /services.html
   new_window: false
   highlight: false
 - name: Managed Services
-  link: /managed-services/
+  link: /managed-services.html
   new_window: false
   highlight: false
 - name: Advisory
-  link: /advisory/
+  link: /advisory.html
   new_window: false
   highlight: false
 - name: About
-  link: /about/
+  link: /about-us.html
   new_window: false
   highlight: false
 - name: Get in Touch
-  link: /contact/
+  link: /contact.html
   new_window: false
   highlight: true
