@@ -14,6 +14,10 @@
   link: /about-us.html
   new_window: false
   highlight: false
+- name: Blog
+  link: /blog/
+  new_window: false
+  highlight: false  
 - name: Get in Touch
   link: /contact.html
   new_window: false
