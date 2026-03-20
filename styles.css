@@ -1481,7 +1481,6 @@ footer {
 
 @media (max-width: 768px) {
   nav { padding: 0 1.5rem; }
-  nav ul { display: none; }
   section, #services-main { padding: 5rem 1.5rem; }
   #hero, .page-hero { padding: 8rem 1.5rem 5rem; }
   .hero-stats { flex-wrap: wrap; }
@@ -1498,4 +1497,107 @@ footer {
   .footer-links { justify-content: center; flex-wrap: wrap; }
   #contact-cta { padding: 6rem 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════
+   HAMBURGER BUTTON
+   ══════════════════════════════════════════════════════ */
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 300;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #042551;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animate to × when open */
+.nav-hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ══════════════════════════════════════════════════════
+   MOBILE NAV MENU
+   ══════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  nav { padding: 0 1.5rem; }
+
+  .nav-hamburger { display: flex; }
+
+  nav ul {
+    /* Hidden by default */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: fixed;
+    top: 68px; /* matches nav height */
+    left: 0;
+    right: 0;
+    background: rgba(250, 250, 250, 0.97);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0 1rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 199;
+  }
+
+  nav ul.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  nav ul li { width: 100%; }
+
+  nav ul li a {
+    display: block;
+    padding: 0.85rem 1.75rem;
+    font-size: 1rem;
+    color: rgba(0, 75, 175, 0.9);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background 0.15s;
+  }
+
+  nav ul li:last-child a { border-bottom: none; }
+
+  nav ul li a:hover {
+    background: rgba(26, 111, 255, 0.06);
+    color: #042551;
+  }
+
+  /* Keep CTA styled nicely in mobile menu */
+  nav ul li a.nav-cta {
+    margin: 0.75rem 1.75rem 0;
+    padding: 0.65rem 1.35rem !important;
+    text-align: center;
+    border-radius: 6px;
+    border-bottom: none !important;
+  }
 }
