@@ -31,15 +31,13 @@ layout: default
     {% assign author = site.staff_members | where: "url", author_id | first %}
     {% if author %}
     <div class="post-hero-author">
-      <div class="post-hero-author-inner">
-        <div class="post-hero-author-img">
-          <img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}" />
-        </div>
-        <div class="post-hero-author-divider"></div>
-        <div class="post-hero-author-text">
-          <p class="post-hero-author-name">{{ author.name }}</p>
-          <p class="post-hero-author-role">{{ author.role | default: "Consultant" }}</p>
-        </div>
+      <div class="post-hero-author-img">
+        <img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}" />
+      </div>
+      <div class="post-hero-author-text">
+        <p class="post-hero-author-label">Written by</p>
+        <p class="post-hero-author-name">{{ author.name }}</p>
+        <p class="post-hero-author-role">{{ author.role | default: "Consultant, Astrav" }}</p>
       </div>
     </div>
     {% endif %}
