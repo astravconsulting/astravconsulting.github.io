@@ -1417,7 +1417,7 @@ section { padding: 4.5rem 4rem; }
    ══════════════════════════════════════════════════════════════════════════ */
 
 footer {
-  background: var(--navy);
+  background: rgba(250,250,250,0.8);
   border-top: 1px solid var(--border);
   padding: 2.5rem 4rem;
   display: flex;
@@ -1448,12 +1448,12 @@ footer {
 
 .footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a {
-  color: var(--muted);
+  color: rgba(0,75,175,0.9);
   text-decoration: none;
   font-size: 0.825rem;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--white); }
+.footer-links a:hover { color: rgb(3, 26, 61); }
 
 .footer-copy {
   font-size: 0.75rem;

@@ -26,12 +26,20 @@
 		{% endif %}
 	</head>
 	<body>
+
 	<!-- NAV -->
 	<nav>
 	<a class="logo" href="https://www.astravconsulting.com/index.html">
 		<img src="https://www.astravconsulting.com/images/cropped_logo.png" alt="Astrav Consulting" class="logo-img" />
 	</a>
-	<ul>
+
+	<button class="nav-hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+
+	<ul id="navMenu">
 		<li><a href="https://www.astravconsulting.com/services.html">Services</a></li>
 		<li><a href="https://www.astravconsulting.com/managed-services.html">Managed Services</a></li>
 		<li><a href="https://www.astravconsulting.com/advisory.html">Advisory</a></li>
@@ -42,36 +50,38 @@
 	</nav>
 
 		{{ content }}
+		<!-- FOOTER -->
+		<footer>
+			<div class="footer-brand">
+				<img src="https://www.astravconsulting.com/logo.png" alt="Astrav Consulting" class="footer-logo-img" />
+			</div>
+			<ul class="footer-links">
+				<li><a href="https://www.astravconsulting.com/services.html">Services</a></li>
+				<li><a href="https://www.astravconsulting.com/managed-services.html">Managed Services</a></li>
+				<li><a href="https://www.astravconsulting.com/advisory.html">Advisory</a></li>
+				<li><a href="https://www.astravconsulting.com/about.html">About</a></li>
+				<li><a href="https://www.astravconsulting.com/contact.html">Contact</a></li>
+			</ul>
+			<div class="footer-copy">© 2026 ASTRAV CONSULTING. ALL RIGHTS RESERVED.</div>
+		</footer>
+		<script>
+			const toggle = document.getElementById('navToggle');
+			const menu   = document.getElementById('navMenu');
 
-		{% if page.url == "/" %}
-			<!-- Do nothing, hide footer -->
-		{% else %}
-			<footer>
-				<div class="container">
-					<p class="editor-link"><a href="cloudcannon:collections/_data/footer.yml" class="btn"><strong>&#9998;</strong> Edit footer</a></p>
-					<div class="footer-columns">
-						{% for column in site.data.footer %}
-						<ul class="footer-links">
-							{% for link in column.links %}
-								<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon }}-icon"{% endif %}>
-									{% if link.social_icon %}
-										{% include social-icon.html icon=link.social_icon %}
-									{% endif %}
-									{{ link.name }}</a></li>
-							{% endfor %}
-						</ul>
-						{% endfor %}
-					</div>
-					<p class="copyright">&copy; {{ site.time | date: '%Y' }} ASTRAV CONSULTING. ALL RIGHTS RESERVED. &bull; <a href="#">Terms</a> &amp; <a href="#">Privacy</a></p>
-				</div>
-			</footer>
+			toggle.addEventListener('click', () => {
+				const isOpen = menu.classList.toggle('is-open');
+				toggle.classList.toggle('is-open', isOpen);
+				toggle.setAttribute('aria-expanded', isOpen);
+			});
 
-			<script>
-				document.getElementById("open-nav").onclick = function () {
-					document.body.classList.toggle("nav-open");
-					return false;
-				};
-			</script>
-		{% endif %}
+			// Close menu when a link is clicked
+			menu.querySelectorAll('a').forEach(link => {
+				link.addEventListener('click', () => {
+				menu.classList.remove('is-open');
+				toggle.classList.remove('is-open');
+				toggle.setAttribute('aria-expanded', 'false');
+				});
+			});
+		</script>
 	</body>
 </html>
