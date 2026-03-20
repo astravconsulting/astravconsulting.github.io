@@ -7,7 +7,7 @@ author_staff_member: robin
 image: https://pbs.twimg.com/media/HDRMzOGbQAASfjN?format=jpg&name=small
 ---
 
-# Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
+## Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
 
 In today’s complex digital landscape, organizations rely on multiple cloud and CDN providers—Akamai, Cloudflare, AWS, Azure, and more—to deliver high-performance, secure applications. However, traditional professional services offerings from these providers are often siloed: the hours you purchase can only be applied to their specific products, leaving you constrained and sometimes paying for unused services.
 
