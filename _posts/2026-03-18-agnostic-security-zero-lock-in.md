@@ -3,8 +3,8 @@ date: 2026-03-18
 title: Agnostic Security, zero lock in
 categories:
   - marketing
-author_staff_member: robin
-image: https://pbs.twimg.com/media/HDRMzOGbQAASfjN?format=jpg&name=small
+author_staff_member: sonia
+image: https://astravconsulting.com/images/staff/sonia.png
 ---
 
 ## Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
