@@ -1,14 +1,98 @@
 ---
 ---
 
-<!DOCTYPE html>
-<html>
-<head>
-  {% seo %}
-</head>
-<body>
+<!doctype html>
 
-  {{ content }}
+<html lang="en">
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-6THZCSNKC3"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-6THZCSNKC3');
+		</script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-</body>
+		{% seo %}
+		{% feed_meta %}
+
+		<!-- Google Fonts: Plus Jakarta Sans -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://www.astravconsulting.com/styles.css">
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css">
+		<link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
+
+		{% if jekyll.environment == 'production' and site.google_analytics_key and site.google_analytics_key != '' %}
+			<script>
+				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+				ga('create', '{{ site.google_analytics_key }}', 'auto');
+				ga('send', 'pageview');
+			</script>
+			<script async src='https://www.google-analytics.com/analytics.js'></script>
+		{% endif %}
+	</head>
+	<body>
+
+	<!-- NAV -->
+	<nav>
+	<a class="logo" href="https://www.astravconsulting.com/index.html">
+		<img src="https://www.astravconsulting.com/images/cropped_logo.png" alt="Astrav Consulting" class="logo-img" />
+	</a>
+
+	<button class="nav-hamburger" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+
+	<ul id="navMenu">
+		<li><a href="https://www.astravconsulting.com/services.html">Services</a></li>
+		<li><a href="https://www.astravconsulting.com/managed-services.html">Managed Services</a></li>
+		<li><a href="https://www.astravconsulting.com/advisory.html">Advisory</a></li>
+		<li><a href="https://www.astravconsulting.com/about-us.html">About</a></li>
+		<li><a href="https://www.astravconsulting.com/blog/">Blog</a></li>
+		<li><a href="https://www.astravconsulting.com/contact.html" class="nav-cta">Get in Touch</a></li>
+	</ul>
+	</nav>
+
+		{{ content }}
+		<!-- FOOTER -->
+		<footer>
+			<div class="footer-brand">
+				<img src="https://www.astravconsulting.com/logo.png" alt="Astrav Consulting" class="footer-logo-img" />
+			</div>
+			<ul class="footer-links">
+				<li><a href="https://www.astravconsulting.com/services.html">Services</a></li>
+				<li><a href="https://www.astravconsulting.com/managed-services.html">Managed Services</a></li>
+				<li><a href="https://www.astravconsulting.com/advisory.html">Advisory</a></li>
+				<li><a href="https://www.astravconsulting.com/about.html">About</a></li>
+				<li><a href="https://www.astravconsulting.com/contact.html">Contact</a></li>
+			</ul>
+			<div class="footer-copy">© 2026 ASTRAV CONSULTING. ALL RIGHTS RESERVED.</div>
+		</footer>
+		<script>
+			const toggle = document.getElementById('navToggle');
+			const menu   = document.getElementById('navMenu');
+
+			toggle.addEventListener('click', () => {
+				const isOpen = menu.classList.toggle('is-open');
+				toggle.classList.toggle('is-open', isOpen);
+				toggle.setAttribute('aria-expanded', isOpen);
+			});
+
+			// Close menu when a link is clicked
+			menu.querySelectorAll('a').forEach(link => {
+				link.addEventListener('click', () => {
+				menu.classList.remove('is-open');
+				toggle.classList.remove('is-open');
+				toggle.setAttribute('aria-expanded', 'false');
+				});
+			});
+		</script>
+	</body>
 </html>
