@@ -1417,8 +1417,8 @@ section { padding: 4.5rem 4rem; }
    ══════════════════════════════════════════════════════════════════════════ */
 
 footer {
-  background: rgba(240,240,240,0.9);
-  border-top: 1px solid var(--border);
+  background: rgba(240, 240, 240, 0.85);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   padding: 4rem 4rem 0;
 }
 
@@ -1427,7 +1427,7 @@ footer {
   grid-template-columns: 1.8fr 1fr 1fr 1.4fr;
   gap: 3rem;
   padding-bottom: 3.5rem;
-  border-bottom: 1px solid var(--border2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Brand column */
@@ -1439,16 +1439,15 @@ footer {
   height: 56px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(0,194,203,0.3));
-  transition: filter 0.3s;
+  /* no glow — logo is already dark, let it speak on the light bg */
+  filter: none;
+  transition: opacity 0.2s;
 }
-.footer-logo-img:hover {
-  filter: drop-shadow(0 0 18px rgba(0,194,203,0.55));
-}
+.footer-logo-img:hover { opacity: 0.8; }
 
 .footer-tagline {
   font-size: 0.85rem;
-  color: var(--muted);
+  color: #4a5e7a;             /* medium navy-slate — readable but not harsh */
   line-height: 1.7;
   margin-bottom: 1.5rem;
   max-width: 260px;
@@ -1466,16 +1465,16 @@ footer {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  color: var(--muted);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #3a5272;             /* dark slate icon */
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .footer-social-btn:hover {
-  background: rgba(26,111,255,0.12);
-  border-color: rgba(26,111,255,0.4);
-  color: var(--blue-lt);
+  background: rgba(26, 111, 255, 0.1);
+  border-color: rgba(26, 111, 255, 0.45);
+  color: var(--blue);         /* brand blue on hover */
   transform: translateY(-2px);
 }
 
@@ -1485,7 +1484,7 @@ footer {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--white);
+  color: #050e1f;             /* full navy — strong heading anchor */
   margin-bottom: 1.1rem;
 }
 
@@ -1498,20 +1497,20 @@ footer {
 
 .footer-nav-links a {
   font-size: 0.875rem;
-  color: var(--muted);
+  color: #4a5e7a;             /* same slate as tagline — consistent body tone */
   text-decoration: none;
   transition: color 0.2s, padding-left 0.2s;
   display: inline-block;
 }
 .footer-nav-links a:hover {
-  color: var(--white);
+  color: var(--blue);         /* brand blue on hover — ties into logo colour */
   padding-left: 4px;
 }
 
 /* Contact / CTA column */
 .footer-contact-desc {
   font-size: 0.85rem;
-  color: var(--muted);
+  color: #4a5e7a;
   line-height: 1.65;
   margin-bottom: 1.25rem;
 }
@@ -1520,7 +1519,7 @@ footer {
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--white);
+  color: #ffffff;
   background: var(--blue);
   border-radius: 7px;
   padding: 0.6rem 1.15rem;
@@ -1530,7 +1529,7 @@ footer {
 }
 .footer-cta-btn:hover {
   background: var(--blue-lt);
-  box-shadow: 0 0 24px rgba(26,111,255,0.4);
+  box-shadow: 0 4px 20px rgba(26, 111, 255, 0.35);
 }
 
 /* Bottom bar */
@@ -1545,7 +1544,7 @@ footer {
 
 .footer-copy {
   font-size: 0.78rem;
-  color: rgba(122,144,176,0.45);
+  color: rgba(50, 70, 100, 0.5); /* very muted — legal text should recede */
   letter-spacing: 0.02em;
 }
 
@@ -1556,12 +1555,12 @@ footer {
 
 .footer-bottom-links a {
   font-size: 0.78rem;
-  color: rgba(122,144,176,0.45);
+  color: rgba(50, 70, 100, 0.5);
   text-decoration: none;
   transition: color 0.2s;
   letter-spacing: 0.01em;
 }
-.footer-bottom-links a:hover { color: var(--muted); }
+.footer-bottom-links a:hover { color: #050e1f; }
 
 /* ── Footer responsive ── */
 @media (max-width: 1024px) {
