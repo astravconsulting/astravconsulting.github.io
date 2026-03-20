@@ -216,39 +216,104 @@
 
 .featured-post-visual {
   position: relative;
-  overflow: hidden;
-  background: $navy3;
   width: 400px;
   min-width: 400px;
   max-width: 400px;
   align-self: stretch;
+  overflow: hidden;
 
-  img {
+  // Dark panel background with subtle grid
+  background: $navy3;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 28px 28px;
+
+  // Blue/teal ambient glow behind the image
+  &::before {
+    content: '';
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%,
+        rgba(26,111,255,0.18) 0%,
+        rgba(0,194,203,0.08) 50%,
+        transparent 75%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  // Decorative corner accents — top-left and bottom-right
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      // top-left corner bracket
+      linear-gradient($teal, $teal) top 18px left 18px / 22px 2px no-repeat,
+      linear-gradient($teal, $teal) top 18px left 18px / 2px 22px no-repeat,
+      // bottom-right corner bracket
+      linear-gradient($blue-lt, $blue-lt) bottom 18px right 18px / 22px 2px no-repeat,
+      linear-gradient($blue-lt, $blue-lt) bottom 18px right 18px / 2px 22px no-repeat;
+    opacity: 0.55;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  // Floating inset image
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.98);
+    width: calc(100% - 3rem);
+    height: calc(100% - 3rem);
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: transform 0.4s ease;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.09);
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(26,111,255,0.15),
+      0 0 40px rgba(26,111,255,0.12);
+    z-index: 2;
+    transition:
+      transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.45s ease;
   }
+}
 
-  &:hover img { transform: scale(1.04); }
+// On card hover — image lifts, glow intensifies, corners brighten
+.featured-post:hover .featured-post-visual {
+  &::after { opacity: 0.9; }
+
+  img {
+    transform: translate(-50%, -50%) scale(1.01);
+    box-shadow:
+      0 12px 48px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(26,111,255,0.3),
+      0 0 60px rgba(26,111,255,0.22);
+  }
 }
 
 .featured-post-placeholder {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3rem);
+  height: calc(100% - 3rem);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    linear-gradient(135deg, rgba(26,111,255,0.08) 0%, rgba(0,194,203,0.06) 100%);
+  background: linear-gradient(135deg, rgba(26,111,255,0.07) 0%, rgba(0,194,203,0.05) 100%);
+  z-index: 2;
 
-  svg {
-    color: rgba(255,255,255,0.1);
-  }
+  svg { color: rgba(255,255,255,0.08); }
 }
 
 // ── POST TAG ──────────────────────────────────────────────────────────────────
