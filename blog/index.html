@@ -2,25 +2,151 @@
 title: Blog
 description: Keep up with the latest news.
 ---
-
-<div class="text-container">
-	<p class="editor-link"><a href="cloudcannon:collections/_posts" class="btn"><strong>&#9998;</strong> Add Post</a></p>
-	<ul class="blog-posts">
-		{% include list-posts.html posts=paginator.posts %}
-	</ul>
-
-	{% if paginator.total_pages > 1 %}
-		<!-- Pagination links -->
-		<div class="pagination">
-			{% if paginator.previous_page %}
-				<a href="{% include relative-src.html src=paginator.previous_page_path %}" class="previous btn">&larr; Newer posts</a>
-			{% endif %}
-
-			<span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
-
-			{% if paginator.next_page %}
-				<a href="{% include relative-src.html src=paginator.next_page_path %}" class="next btn">Older posts &rarr;</a>
-			{% endif %}
-		</div>
-	{% endif %}
-</div>
+ 
+<!-- ── BLOG HERO ─────────────────────────────────────────────────────────── -->
+<section class="blog-hero">
+  <div class="hero-grid"></div>
+  <div class="orb orb-blog-1"></div>
+  <div class="orb orb-blog-2"></div>
+  <div class="blog-hero-inner">
+    <p class="blog-hero-label">
+      <span class="badge-dot"></span> Insights &amp; Perspectives
+    </p>
+    <h1 class="blog-hero-title">The Astrav <span class="grad">Journal</span></h1>
+    <p class="blog-hero-sub">
+      Strategy, technology, and leadership thinking from our consulting team.
+    </p>
+  </div>
+</section>
+ 
+<!-- ── BLOG CONTENT ──────────────────────────────────────────────────────── -->
+<section class="blog-section">
+  <div class="blog-container">
+ 
+    {% assign posts = paginator.posts %}
+    {% assign featured = posts | first %}
+    {% assign rest = posts | slice: 1, 100 %}
+ 
+    <!-- Featured post -->
+    {% if featured %}
+    <a href="{{ featured.url | relative_url }}" class="featured-post">
+      <div class="featured-post-body">
+        <div class="featured-eyebrow">
+          <span class="post-tag">{{ featured.categories | first | default: "Insights" }}</span>
+          <span class="featured-badge">Featured</span>
+        </div>
+        <h2 class="featured-post-title">{{ featured.title }}</h2>
+        <p class="featured-post-excerpt">
+          {{ featured.excerpt | strip_html | truncatewords: 40 }}
+        </p>
+        <div class="post-meta-row">
+          <span class="post-date">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {{ featured.date | date: "%B %-d, %Y" }}
+          </span>
+          {% if featured.author %}
+          <span class="post-author">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            {{ featured.author }}
+          </span>
+          {% endif %}
+          {% if featured.read_time %}
+          <span class="post-read-time">{{ featured.read_time }} min read</span>
+          {% endif %}
+        </div>
+        <span class="featured-read-link">
+          Read article
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+      <div class="featured-post-visual">
+        {% if featured.image %}
+          <img src="{{ featured.image | relative_url }}" alt="{{ featured.title }}" />
+        {% else %}
+          <div class="featured-post-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+        {% endif %}
+      </div>
+    </a>
+    {% endif %}
+ 
+    <!-- Post grid -->
+    {% if rest.size > 0 %}
+    <div class="blog-grid-header">
+      <h3 class="blog-grid-label">More Articles</h3>
+      <div class="blog-grid-rule"></div>
+    </div>
+    <ul class="blog-grid">
+      {% for post in rest %}
+      <li class="blog-card">
+        <a href="{{ post.url | relative_url }}" class="blog-card-inner">
+          {% if post.image %}
+          <div class="blog-card-img">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" />
+          </div>
+          {% else %}
+          <div class="blog-card-img blog-card-img--placeholder">
+            <div class="card-placeholder-inner"></div>
+          </div>
+          {% endif %}
+          <div class="blog-card-body">
+            <span class="post-tag">{{ post.categories | first | default: "Insights" }}</span>
+            <h3 class="blog-card-title">{{ post.title }}</h3>
+            <p class="blog-card-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 22 }}
+            </p>
+            <div class="blog-card-footer">
+              <span class="post-date">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                {{ post.date | date: "%b %-d, %Y" }}
+              </span>
+              <span class="card-read-more">
+                Read
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+ 
+    <!-- Pagination -->
+    {% if paginator.total_pages > 1 %}
+    <nav class="blog-pagination" aria-label="Blog pagination">
+      <div class="pagination-inner">
+        {% if paginator.previous_page %}
+          <a href="{% include relative-src.html src=paginator.previous_page_path %}" class="pagination-btn pagination-btn--prev">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Newer posts
+          </a>
+        {% else %}
+          <span class="pagination-btn pagination-btn--disabled">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Newer posts
+          </span>
+        {% endif %}
+ 
+        <span class="pagination-count">
+          Page {{ paginator.page }} <span class="pag-of">of</span> {{ paginator.total_pages }}
+        </span>
+ 
+        {% if paginator.next_page %}
+          <a href="{% include relative-src.html src=paginator.next_page_path %}" class="pagination-btn pagination-btn--next">
+            Older posts
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        {% else %}
+          <span class="pagination-btn pagination-btn--disabled">
+            Older posts
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
+ 
+  </div>
+</section>
