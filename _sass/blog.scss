@@ -939,6 +939,18 @@
 // ── POST NAVIGATION ───────────────────────────────────────────────────────────
 
 .post-nav {
+  // Reset all global nav{} overrides from styles.css
+  position: static;
+  top: auto;
+  left: auto;
+  right: auto;
+  height: auto;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: none;
+  padding: 0;
+  z-index: auto;
+  display: block;
   margin-top: 1rem;
 }
 

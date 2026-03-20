@@ -81,7 +81,7 @@ layout: default
 
     <!-- Post navigation -->
     {% if page.previous.url or page.next.url %}
-    <nav class="post-nav" aria-label="Post navigation">
+    <div class="post-nav" role="navigation" aria-label="Post navigation">
       <div class="post-nav-inner">
         {% if page.previous.url %}
         <a href="{% include relative-src.html src=page.previous.url %}" class="post-nav-item post-nav-item--prev">
@@ -112,7 +112,7 @@ layout: default
         <span></span>
         {% endif %}
       </div>
-    </nav>
+    </div>
     {% endif %}
 
     <!-- Disqus comments -->
