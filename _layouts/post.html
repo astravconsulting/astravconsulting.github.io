@@ -1,46 +1,139 @@
 ---
-layout: page
+layout: default
 ---
-<div class="blog-post text-container">
-	{% include post-title.html post=page %}
 
-	<p class="editor-link"><a href="cloudcannon:collections/{{ page.path }}" class="btn"><strong>&#9998;</strong> Edit Post</a></p>
-	<div class="post-content">
-		{{ content }}
+<!-- ── POST HERO ──────────────────────────────────────────────────────────── -->
+<section class="post-hero">
+  <div class="post-hero-grid"></div>
+  <div class="post-hero-orb"></div>
+  <div class="post-hero-inner">
 
-		<div class="author">
-			{% assign author_id = page.author_staff_member | prepend: "/staff_members/" | append: "/" %}
-			{% assign author = site.staff_members | where: "url", author_id | first %}
-			<div class="square-image"><img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}"/></div>
-			<p class="blurb">{{ author.blurb }}</p>
-		</div>
+    <div class="post-hero-meta">
+      {% if page.categories and page.categories.size > 0 %}
+        <span class="post-tag">{{ page.categories | first }}</span>
+      {% endif %}
+      <span class="post-hero-date">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        {{ page.date | date: "%B %-d, %Y" }}
+      </span>
+      {% if page.read_time %}
+        <span class="post-hero-readtime">{{ page.read_time }} min read</span>
+      {% endif %}
+    </div>
 
-		<div class="blog-navigation">
-			{% if page.previous.url %}
-				<a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
-			{% endif %}
-			{% if page.next.url %}
-				<a class="next" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }} &raquo;</a>
-			{% endif %}
-		</div>
+    <h1 class="post-hero-title">{{ page.title }}</h1>
 
-		{% if site.disqus_shortname and page.comments %}
-			<div id="disqus_thread"></div>
-			<script>
-				var disqus_shortname = '{{ site.disqus_shortname }}';
-				var disqus_config = function () {
-					this.page.url = "{{ page.url | prepend: site.url }}";
-					this.page.identifier = "{{ page.id }}";
-				};
+    {% if page.description %}
+      <p class="post-hero-desc">{{ page.description }}</p>
+    {% endif %}
 
-				(function() {  // DON'T EDIT BELOW THIS LINE
-					var d = document, s = d.createElement('script');
-					s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-					s.setAttribute('data-timestamp', +new Date());
-					(d.head || d.body).appendChild(s);
-				})();
-			</script>
-			<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-		{% endif %}
-	</div>
+    {% assign author_id = page.author_staff_member | prepend: "/staff_members/" | append: "/" %}
+    {% assign author = site.staff_members | where: "url", author_id | first %}
+    {% if author %}
+    <div class="post-hero-author">
+      <div class="post-hero-author-img">
+        <img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}" />
+      </div>
+      <div>
+        <p class="post-hero-author-name">{{ author.name }}</p>
+        <p class="post-hero-author-role">{{ author.role | default: "Consultant" }}</p>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- ── COVER IMAGE ────────────────────────────────────────────────────────── -->
+{% if page.image %}
+<div class="post-cover">
+  <div class="post-cover-inner">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" />
+  </div>
+</div>
+{% endif %}
+
+<!-- ── ARTICLE BODY ───────────────────────────────────────────────────────── -->
+<div class="post-layout">
+  <article class="post-article">
+
+    <!-- CloudCannon edit button (hidden in production) -->
+    <p class="editor-link"><a href="cloudcannon:collections/{{ page.path }}" class="btn"><strong>&#9998;</strong> Edit Post</a></p>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <!-- Author card -->
+    {% if author %}
+    <div class="post-author-card">
+      <div class="post-author-card-img">
+        <img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}" />
+      </div>
+      <div class="post-author-card-body">
+        <p class="post-author-card-label">Written by</p>
+        <p class="post-author-card-name">{{ author.name }}</p>
+        <p class="post-author-card-blurb">{{ author.blurb }}</p>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Post navigation -->
+    {% if page.previous.url or page.next.url %}
+    <nav class="post-nav" aria-label="Post navigation">
+      <div class="post-nav-inner">
+        {% if page.previous.url %}
+        <a href="{% include relative-src.html src=page.previous.url %}" class="post-nav-item post-nav-item--prev">
+          <span class="post-nav-dir">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Previous
+          </span>
+          <span class="post-nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% else %}
+        <span></span>
+        {% endif %}
+
+        <a href="{{ '/blog/' | relative_url }}" class="post-nav-all">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          All posts
+        </a>
+
+        {% if page.next.url %}
+        <a href="{% include relative-src.html src=page.next.url %}" class="post-nav-item post-nav-item--next">
+          <span class="post-nav-dir">
+            Next
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+          <span class="post-nav-title">{{ page.next.title }}</span>
+        </a>
+        {% else %}
+        <span></span>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
+
+    <!-- Disqus comments -->
+    {% if site.disqus_shortname and page.comments %}
+    <div class="post-comments">
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_shortname = '{{ site.disqus_shortname }}';
+        var disqus_config = function () {
+          this.page.url = "{{ page.url | prepend: site.url }}";
+          this.page.identifier = "{{ page.id }}";
+        };
+        (function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+    {% endif %}
+
+  </article>
 </div>
