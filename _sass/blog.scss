@@ -156,13 +156,15 @@
 }
 
 .featured-post-title {
-  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  font-size: clamp(1.45rem, 4vw, 2.25rem);
   font-weight: 800;
   color: $white;
   letter-spacing: -0.025em;
   line-height: 1.18;
   margin-bottom: 1rem;
   transition: color 0.2s;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .featured-post-excerpt {
@@ -1119,14 +1121,46 @@
   .featured-post {
     grid-template-columns: 1fr;
   }
+
   .featured-post-visual {
-    height: 280px;
-    order: -1;
+    // Release the fixed desktop widths — must be full-width in single-column layout
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: 260px;
     min-height: unset;
+    order: -1;
+
+    // Gradient fade at the bottom so image melts into the card body below
+    &::before {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%,
+          rgba(26,111,255,0.15) 0%,
+          rgba(0,194,203,0.07) 50%,
+          transparent 72%),
+        linear-gradient(to bottom,
+          transparent 40%,
+          rgba(8, 20, 41, 0.7) 80%,
+          $navy2 100%);
+    }
+
+    // Floating inset image fills the full panel height on mobile
+    img {
+      width: calc(100% - 2rem);
+      height: calc(100% - 1.5rem);
+      top: 0;
+      transform: translateX(-50%) translateY(0) scale(0.98);
+    }
   }
+
+  .featured-post:hover .featured-post-visual img {
+    transform: translateX(-50%) translateY(0) scale(1.01);
+  }
+
   .featured-post-body {
-    padding: 2.25rem 2rem;
+    padding: 1.5rem 1.75rem 2rem;
   }
+
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1141,6 +1175,30 @@
   }
   .featured-post {
     margin-bottom: 2.5rem;
+    border-radius: 14px;
+  }
+
+  .featured-post-visual {
+    height: 200px;
+
+    img {
+      width: calc(100% - 1.5rem);
+      height: calc(100% - 1rem);
+      border-radius: 8px;
+    }
+  }
+
+  .featured-post-body {
+    padding: 1.25rem 1.25rem 1.75rem;
+  }
+
+  .featured-post-excerpt {
+    display: none; // too much text on small screens — title + meta + CTA is enough
+  }
+
+  .post-meta-row {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
   }
   .blog-grid {
     grid-template-columns: 1fr;
