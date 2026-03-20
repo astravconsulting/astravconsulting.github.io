@@ -4,7 +4,7 @@ title: Agnostic Security, zero lock in
 categories:
   - marketing
 author_staff_member: sonia
-image: https://astravconsulting.com/images/staff/sonia.png
+image:
 ---
 
 ## Unlock Flexible, Agnostic Security with Astrav Consulting Professional Services
