@@ -10,7 +10,6 @@ disqus_shortname:
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: /images/cropped_logo.png
-description: Astrav Provides professional services for CDN and Cloud security operations.
 author:
   name: Astrav Consulting
   email: info@astravconsulting.com
