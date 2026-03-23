@@ -64,7 +64,7 @@ defaults:
     values:
       full_width: true
   - scope:
-      path: "/managed-services/"
+      path: "managed-services/index.html"
     values:
       layout: "default"
 
