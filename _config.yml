@@ -63,6 +63,10 @@ defaults:
       path: "contact.html"
     values:
       full_width: true
+  - scope:
+      path: "/managed-services/"
+    values:
+      layout: "default"
 
 jekyll-archives:
   enabled:
