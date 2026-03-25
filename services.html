@@ -3,6 +3,534 @@ title: Services
 description: Services
 ---
 
+<!-- ══════════════════════════════════════════════════
+     PAGE-SPECIFIC STYLES
+     ══════════════════════════════════════════════════ -->
+<style>
+/* ── TAG ─────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(26,111,255,0.10);
+  border: 1px solid rgba(26,111,255,0.28);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 1.2rem;
+}
+
+/* ── PAGE HERO ───────────────────────────────────── */
+.page-hero {
+  position: relative;
+  min-height: 54vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10rem 2rem 5rem;
+  overflow: hidden;
+}
+.page-hero-content { position: relative; z-index: 2; max-width: 820px; }
+.page-hero h1 { font-size: clamp(2.4rem,5vw,4.4rem); font-weight:800; letter-spacing:-0.03em; color:var(--white); line-height:1.08; }
+.hero-sub { margin-top:1rem; font-size:1.15rem; color:var(--muted); max-width:580px; margin-inline:auto; line-height:1.75; }
+
+/* hero stat pills */
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+}
+.hero-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 100px;
+  padding: 0.45rem 1.1rem 0.45rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--off-white);
+  backdrop-filter: blur(6px);
+  animation: fadeUp 0.6s ease both;
+}
+.pill-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+  flex-shrink: 0;
+}
+
+/* ── STICKY SERVICE NAV ──────────────────────────── */
+#svc-nav {
+  position: sticky;
+  top: 68px;
+  z-index: 100;
+  background: rgba(5,14,31,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+#svc-nav::-webkit-scrollbar { display: none; }
+.svc-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.svc-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: inherit;
+}
+.svc-tab:hover { color: var(--off-white); }
+.svc-tab.active {
+  color: var(--blue-lt);
+  border-bottom-color: var(--blue-lt);
+}
+.svc-tab-icon { font-size: 1rem; }
+
+/* ── SERVICES MAIN ───────────────────────────────── */
+#services-main {
+  padding: 5rem 2rem 4rem;
+}
+.services-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── SERVICE ACCORDION CARDS ─────────────────────── */
+.svc-accordion {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 1rem;
+}
+.svc-accordion:hover {
+  border-color: rgba(26,111,255,0.25);
+}
+.svc-accordion.is-open {
+  border-color: rgba(26,111,255,0.35);
+  box-shadow: 0 0 40px rgba(26,111,255,0.08);
+}
+
+.svc-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.svc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 0;
+}
+.svc-icon-wrap {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(26,111,255,0.1);
+  border: 1px solid rgba(26,111,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+.svc-accordion.is-open .svc-icon-wrap {
+  background: rgba(26,111,255,0.18);
+  border-color: rgba(26,111,255,0.4);
+  transform: scale(1.05);
+}
+.svc-header-text { min-width: 0; }
+.svc-num-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 0.2rem;
+}
+.svc-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.svc-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.svc-badge-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.2rem 0.7rem;
+  display: none;
+}
+.svc-chevron {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.svc-accordion.is-open .svc-chevron {
+  transform: rotate(180deg);
+  background: rgba(26,111,255,0.15);
+  border-color: rgba(26,111,255,0.3);
+}
+.svc-chevron svg { display: block; }
+
+/* ── ACCORDION BODY ──────────────────────────────── */
+.svc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.svc-accordion.is-open .svc-body {
+  max-height: 800px;
+}
+.svc-body-inner {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid var(--border2);
+}
+
+/* platform badges */
+.plat-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+.plat-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--teal);
+  background: rgba(0,194,203,0.08);
+  border: 1px solid rgba(0,194,203,0.22);
+  border-radius: 6px;
+  padding: 0.28rem 0.7rem;
+}
+
+/* service list as 2-col grid */
+.svc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 2rem;
+}
+.svc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--off-white);
+  line-height: 1.5;
+}
+.svc-list li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blue-lt);
+  flex-shrink: 0;
+  margin-top: 0.52em;
+}
+.svc-list li strong { color: var(--white); }
+
+/* migration special layout */
+.migration-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.migration-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.migration-item h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.migration-item p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── PROCESS SECTION ─────────────────────────────── */
+#process {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#process::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(26,111,255,0.03) 50%, transparent 100%);
+  pointer-events: none;
+}
+.sec-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 3.5rem;
+  line-height: 1.15;
+}
+
+/* process grid */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* connector line */
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: calc(12.5% + 1rem);
+  right: calc(12.5% + 1rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(26,111,255,0.35) 20%, rgba(0,194,203,0.35) 80%, transparent);
+  z-index: 0;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.process-step.visible { opacity: 1; transform: translateY(0); }
+
+.step-circle {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--navy2);
+  border: 2px solid rgba(26,111,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  cursor: default;
+}
+.step-circle:hover {
+  border-color: var(--blue-lt);
+  box-shadow: 0 0 30px rgba(26,111,255,0.3);
+  transform: scale(1.08);
+}
+.step-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--blue-lt), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.step-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,111,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.process-step h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.process-step p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── CTA SECTION ─────────────────────────────────── */
+#contact-cta {
+  position: relative;
+  padding: 7rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.cta-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.cta-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.12;
+  margin-bottom: 1.1rem;
+}
+.grad {
+  background: linear-gradient(90deg, var(--blue-lt), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-desc {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: inherit;
+}
+.btn-primary:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 32px rgba(26,111,255,0.45);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--off-white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.14);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-1px);
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .svc-list { grid-template-columns: 1fr; }
+  .migration-items { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 1rem; }
+  .process-grid::before { display: none; }
+}
+@media (max-width: 600px) {
+  .svc-header { padding: 1.2rem 1.25rem; gap: 1rem; }
+  .svc-body-inner { padding: 0 1.25rem 1.5rem; }
+  .svc-title { font-size: 1rem; }
+  .svc-icon-wrap { width: 44px; height: 44px; font-size: 1.15rem; }
+  .process-grid { grid-template-columns: 1fr; }
+  .hero-pills { gap: 0.5rem; }
+}
+</style>
+
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="orb orb-1"></div>
@@ -11,105 +539,241 @@ description: Services
   <div class="page-hero-content">
     <div class="tag">Service Capabilities</div>
     <h1>A complete security practice,<br /><span class="grad">end-to-end</span></h1>
-    <p class="hero-sub">From architecture design to continuous managed operations — we cover the full security lifecycle across CDN, cloud, and API layers.</p>
+    <p class="hero-sub">From architecture design to continuous managed operations — across CDN, cloud, and API layers.</p>
+  </div>
+  <div class="hero-pills">
+    <div class="hero-pill" style="animation-delay:0.15s"><span class="pill-dot"></span> CDN Security</div>
+    <div class="hero-pill" style="animation-delay:0.25s"><span class="pill-dot" style="background:var(--blue-lt);box-shadow:0 0 8px var(--blue-lt)"></span> Cloud Infrastructure</div>
+    <div class="hero-pill" style="animation-delay:0.35s"><span class="pill-dot" style="background:#a78bfa;box-shadow:0 0 8px #a78bfa"></span> API Security</div>
+    <div class="hero-pill" style="animation-delay:0.45s"><span class="pill-dot" style="background:#f59e0b;box-shadow:0 0 8px #f59e0b"></span> Migration</div>
+    <div class="hero-pill" style="animation-delay:0.55s"><span class="pill-dot" style="background:#34d399;box-shadow:0 0 8px #34d399"></span> Professional Services</div>
   </div>
 </section>
 
-<!-- SERVICES GRID -->
+<!-- STICKY SERVICE NAV -->
+<div id="svc-nav">
+  <div class="svc-nav-inner">
+    <button class="svc-tab active" data-target="cdn">
+      <span class="svc-tab-icon">🛡️</span> CDN Security
+    </button>
+    <button class="svc-tab" data-target="cloud">
+      <span class="svc-tab-icon">☁️</span> Cloud
+    </button>
+    <button class="svc-tab" data-target="api">
+      <span class="svc-tab-icon">🔐</span> API Security
+    </button>
+    <button class="svc-tab" data-target="migration">
+      <span class="svc-tab-icon">🚀</span> Migration
+    </button>
+    <button class="svc-tab" data-target="professional">
+      <span class="svc-tab-icon">💼</span> Professional
+    </button>
+  </div>
+</div>
+
+<!-- SERVICES MAIN -->
 <section id="services-main">
-  <div class="services-grid">
+  <div class="services-wrap">
 
-    <div class="svc-card" id="cdn">
-      <div class="svc-num">01 / CDN Security</div>
-      <div class="svc-icon">🛡️</div>
-      <div class="svc-name">CDN Security & Delivery Consulting</div>
-      <div class="plat-badges">
-        <span class="plat-badge">Akamai</span>
-        <span class="plat-badge">Cloudflare</span>
-        <span class="plat-badge">CloudFront</span>
-        <span class="plat-badge">Fastly</span>
-        <span class="plat-badge">Imperva</span>
-        <span class="plat-badge">F5 Shape</span>
+    <!-- 01 CDN -->
+    <div class="svc-accordion is-open" id="cdn">
+      <div class="svc-header" role="button" aria-expanded="true" tabindex="0">
+        <div class="svc-header-left">
+          <div class="svc-icon-wrap">🛡️</div>
+          <div class="svc-header-text">
+            <div class="svc-num-label">01 / CDN Security</div>
+            <div class="svc-title">CDN Security &amp; Delivery Consulting</div>
+          </div>
+        </div>
+        <div class="svc-header-right">
+          <div class="plat-badges" style="margin:0;padding:0">
+            <span class="plat-badge">Akamai</span>
+            <span class="plat-badge">Cloudflare</span>
+            <span class="plat-badge">CloudFront</span>
+            <span class="plat-badge">Fastly</span>
+            <span class="plat-badge" style="display:none">Imperva</span>
+            <span class="plat-badge" style="display:none">F5 Shape</span>
+          </div>
+          <div class="svc-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="svc-divider"></div>
-      <ul class="svc-list">
-        <li>CDN architecture design</li>
-        <li>CDN onboarding and integration</li>
-        <li>DNS and traffic migration</li>
-        <li>SSL/TLS certificate deployment & management</li>
-        <li>Web Application Firewall (WAF) implementation and tuning</li>
-        <li>DDoS protection configuration</li>
-        <li>Bot Abuse, Fraud and Scraping Protection</li>
-        <li>CDN performance optimization & cache tuning</li>
-        <li>Multi-CDN architecture & failover design</li>
-        <li>CDN migration between providers</li>
-        <li>CDN monitoring & troubleshooting</li>
-        <li>Continuous CDN security management</li>
-      </ul>
-    </div>
-
-    <div class="svc-card" id="cloud">
-      <div class="svc-num">02 / Cloud Infrastructure</div>
-      <div class="svc-icon">☁️</div>
-      <div class="svc-name">Cloud Security & Infrastructure Consulting</div>
-      <div class="plat-badges">
-        <span class="plat-badge">Linode</span>
-        <span class="plat-badge">AWS</span>
-        <span class="plat-badge">Azure</span>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <div class="plat-badges">
+            <span class="plat-badge">Akamai</span>
+            <span class="plat-badge">Cloudflare</span>
+            <span class="plat-badge">CloudFront</span>
+            <span class="plat-badge">Fastly</span>
+            <span class="plat-badge">Imperva</span>
+            <span class="plat-badge">F5 Shape</span>
+          </div>
+          <ul class="svc-list">
+            <li>CDN architecture design</li>
+            <li>CDN onboarding and integration</li>
+            <li>DNS and traffic migration</li>
+            <li>SSL/TLS certificate deployment &amp; management</li>
+            <li>WAF implementation and tuning</li>
+            <li>DDoS protection configuration</li>
+            <li>Bot abuse, fraud &amp; scraping protection</li>
+            <li>CDN performance &amp; cache tuning</li>
+            <li>Multi-CDN architecture &amp; failover design</li>
+            <li>CDN migration between providers</li>
+            <li>CDN monitoring &amp; troubleshooting</li>
+            <li>Continuous CDN security management</li>
+          </ul>
+        </div>
       </div>
-      <div class="svc-divider"></div>
-      <ul class="svc-list">
-        <li>Cloud environment setup and onboarding</li>
-        <li>Identity and Access Management (IAM) implementation</li>
-        <li>Logging, monitoring, and alerting setup</li>
-        <li>Cloud performance and cost optimization</li>
-        <li>Disaster recovery and high availability design</li>
-      </ul>
     </div>
 
-    <div class="svc-card" id="api">
-      <div class="svc-num">03 / API Security</div>
-      <div class="svc-icon">🔐</div>
-      <div class="svc-name">API Security Consulting</div>
-      <div class="plat-badges">
-        <span class="plat-badge">Noname Security</span>
-        <span class="plat-badge">Salt Security</span>
+    <!-- 02 Cloud -->
+    <div class="svc-accordion" id="cloud">
+      <div class="svc-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="svc-header-left">
+          <div class="svc-icon-wrap">☁️</div>
+          <div class="svc-header-text">
+            <div class="svc-num-label">02 / Cloud Infrastructure</div>
+            <div class="svc-title">Cloud Security &amp; Infrastructure Consulting</div>
+          </div>
+        </div>
+        <div class="svc-header-right">
+          <div class="plat-badges" style="margin:0;padding:0">
+            <span class="plat-badge">AWS</span>
+            <span class="plat-badge">Azure</span>
+            <span class="plat-badge">Linode</span>
+          </div>
+          <div class="svc-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="svc-divider"></div>
-      <ul class="svc-list">
-        <li>API security architecture design</li>
-        <li>API discovery and inventory</li>
-        <li>API risk assessment & vulnerability analysis</li>
-        <li>API security platform integration & deployment</li>
-        <li>API authentication & access control implementation</li>
-        <li>API security policy implementation & tuning</li>
-        <li>Continuous API monitoring and protection</li>
-      </ul>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <div class="plat-badges">
+            <span class="plat-badge">Linode</span>
+            <span class="plat-badge">AWS</span>
+            <span class="plat-badge">Azure</span>
+          </div>
+          <ul class="svc-list">
+            <li>Cloud environment setup &amp; onboarding</li>
+            <li>Identity &amp; Access Management (IAM)</li>
+            <li>Logging, monitoring, and alerting setup</li>
+            <li>Cloud performance and cost optimization</li>
+            <li>Disaster recovery &amp; high availability design</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="svc-card" id="migration">
-      <div class="svc-num">04 / Migration & Transformation</div>
-      <div class="svc-icon">🚀</div>
-      <div class="svc-name">Migration & Transformation Services</div>
-      <div class="svc-divider"></div>
-      <ul class="svc-list">
-        <li><strong>CDN platform migration</strong> — Seamless migration between CDN providers with zero downtime, including configuration transfer, testing, and traffic cutover</li>
-        <li><strong>Cloud migration and secure deployment</strong> — End-to-end cloud migration services with security-first approach, infrastructure setup, and optimized deployment strategies</li>
-      </ul>
+    <!-- 03 API -->
+    <div class="svc-accordion" id="api">
+      <div class="svc-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="svc-header-left">
+          <div class="svc-icon-wrap">🔐</div>
+          <div class="svc-header-text">
+            <div class="svc-num-label">03 / API Security</div>
+            <div class="svc-title">API Security Consulting</div>
+          </div>
+        </div>
+        <div class="svc-header-right">
+          <div class="plat-badges" style="margin:0;padding:0">
+            <span class="plat-badge">Noname Security</span>
+            <span class="plat-badge">Salt Security</span>
+          </div>
+          <div class="svc-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <div class="plat-badges">
+            <span class="plat-badge">Noname Security</span>
+            <span class="plat-badge">Salt Security</span>
+          </div>
+          <ul class="svc-list">
+            <li>API security architecture design</li>
+            <li>API discovery and inventory</li>
+            <li>API risk assessment &amp; vulnerability analysis</li>
+            <li>Platform integration &amp; deployment</li>
+            <li>API authentication &amp; access control</li>
+            <li>Security policy implementation &amp; tuning</li>
+            <li>Continuous API monitoring and protection</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="svc-card" id="professional">
-      <div class="svc-num">05 / Project-Based Services</div>
-      <div class="svc-icon">💼</div>
-      <div class="svc-name">Professional Services</div>
-      <div class="svc-divider"></div>
-      <ul class="svc-list">
-        <li>One-time CDN integration</li>
-        <li>Cloud security implementation projects</li>
-        <li>API security deployment projects</li>
-        <li>Security architecture implementation</li>
-        <li>Performance & security optimization projects</li>
-      </ul>
+    <!-- 04 Migration -->
+    <div class="svc-accordion" id="migration">
+      <div class="svc-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="svc-header-left">
+          <div class="svc-icon-wrap">🚀</div>
+          <div class="svc-header-text">
+            <div class="svc-num-label">04 / Migration &amp; Transformation</div>
+            <div class="svc-title">Migration &amp; Transformation Services</div>
+          </div>
+        </div>
+        <div class="svc-header-right">
+          <div class="svc-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <div class="migration-items" style="padding-top:1.5rem">
+            <div class="migration-item">
+              <h4>CDN Platform Migration</h4>
+              <p>Seamless migration between CDN providers with zero downtime — including configuration transfer, testing, and traffic cutover.</p>
+            </div>
+            <div class="migration-item">
+              <h4>Cloud Migration &amp; Secure Deployment</h4>
+              <p>End-to-end cloud migration with a security-first approach — infrastructure setup, and optimized deployment strategies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 Professional -->
+    <div class="svc-accordion" id="professional">
+      <div class="svc-header" role="button" aria-expanded="false" tabindex="0">
+        <div class="svc-header-left">
+          <div class="svc-icon-wrap">💼</div>
+          <div class="svc-header-text">
+            <div class="svc-num-label">05 / Project-Based Services</div>
+            <div class="svc-title">Professional Services</div>
+          </div>
+        </div>
+        <div class="svc-header-right">
+          <div class="svc-chevron">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <ul class="svc-list" style="padding-top:1.5rem">
+            <li>One-time CDN integration</li>
+            <li>Cloud security implementation projects</li>
+            <li>API security deployment projects</li>
+            <li>Security architecture implementation</li>
+            <li>Performance &amp; security optimization projects</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -117,37 +781,41 @@ description: Services
 
 <!-- PROCESS -->
 <section id="process">
-  <div class="tag">How We Deliver</div>
-  <h2 class="sec-title">Our proven methodology</h2>
+  <div class="tag reveal">How We Deliver</div>
+  <h2 class="sec-title reveal">Our proven methodology</h2>
 
-  <div class="process-timeline">
-    <div class="timeline-item">
-      <div class="timeline-num">01</div>
-      <div class="timeline-content">
-        <h3>Discovery & Assessment</h3>
-        <p>Comprehensive audit of your existing infrastructure — identifying vulnerabilities, gaps, and optimization opportunities across CDN, cloud, and API layers.</p>
+  <div class="process-grid">
+    <div class="process-step" style="transition-delay:0.05s">
+      <div class="step-circle">
+        <span class="step-num">01</span>
+        <div class="step-glow"></div>
       </div>
+      <h3>Discovery &amp; Assessment</h3>
+      <p>Comprehensive audit of your existing infrastructure — identifying vulnerabilities and optimization opportunities.</p>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-num">02</div>
-      <div class="timeline-content">
-        <h3>Architecture & Strategy</h3>
-        <p>We design a tailored security architecture aligned with your business needs, compliance requirements, and performance targets.</p>
+    <div class="process-step" style="transition-delay:0.15s">
+      <div class="step-circle">
+        <span class="step-num">02</span>
+        <div class="step-glow"></div>
       </div>
+      <h3>Architecture &amp; Strategy</h3>
+      <p>We design a tailored security architecture aligned with your business needs and compliance requirements.</p>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-num">03</div>
-      <div class="timeline-content">
-        <h3>Implementation & Integration</h3>
-        <p>Full deployment, configuration, and platform integration — minimizing disruption and ensuring smooth onboarding across all chosen platforms.</p>
+    <div class="process-step" style="transition-delay:0.25s">
+      <div class="step-circle">
+        <span class="step-num">03</span>
+        <div class="step-glow"></div>
       </div>
+      <h3>Implementation &amp; Integration</h3>
+      <p>Full deployment and platform integration — minimizing disruption with smooth onboarding across all platforms.</p>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-num">04</div>
-      <div class="timeline-content">
-        <h3>Continuous Management</h3>
-        <p>24×7 monitoring, policy tuning, and proactive threat response — keeping your security posture robust long after initial deployment.</p>
+    <div class="process-step" style="transition-delay:0.35s">
+      <div class="step-circle">
+        <span class="step-num">04</span>
+        <div class="step-glow"></div>
       </div>
+      <h3>Continuous Management</h3>
+      <p>24×7 monitoring, policy tuning, and proactive threat response — keeping your security posture robust.</p>
     </div>
   </div>
 </section>
@@ -155,6 +823,7 @@ description: Services
 <!-- CTA -->
 <section id="contact-cta">
   <div class="hero-grid"></div>
+  <div class="orb orb-2"></div>
   <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
   <div class="cta-inner">
     <div class="cta-label">Need Expert Guidance?</div>
@@ -167,37 +836,127 @@ description: Services
   </div>
 </section>
 
-  <!-- FAQ Schema for rich snippets -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What CDN platforms does Astrav Consulting support?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Astrav Consulting provides expert services across 11+ platforms including Akamai, Cloudflare, Amazon CloudFront, Fastly, Imperva, F5 Shape Security, AWS, and Azure."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Astrav Consulting offer WAF tuning and DDoS protection?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We provide WAF tuning, DDoS protection, and bot mitigation across all major CDN platforms as part of our CDN Security practice."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What API security platforms does Astrav Consulting work with?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We specialize in Noname Security and Salt Security for API discovery, risk assessment, authentication, and continuous monitoring."
-        }
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What CDN platforms does Astrav Consulting support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Astrav Consulting provides expert services across 11+ platforms including Akamai, Cloudflare, Amazon CloudFront, Fastly, Imperva, F5 Shape Security, AWS, and Azure."
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "Question",
+      "name": "Does Astrav Consulting offer WAF tuning and DDoS protection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We provide WAF tuning, DDoS protection, and bot mitigation across all major CDN platforms as part of our CDN Security practice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What API security platforms does Astrav Consulting work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We specialize in Noname Security and Salt Security for API discovery, risk assessment, authentication, and continuous monitoring."
+      }
+    }
+  ]
+}
+</script>
 
+<script>
+(function () {
+
+  /* ── ACCORDION ──────────────────────────────────── */
+  const accordions = document.querySelectorAll('.svc-accordion');
+
+  function openAccordion(acc) {
+    accordions.forEach(a => {
+      if (a !== acc) {
+        a.classList.remove('is-open');
+        const h = a.querySelector('.svc-header');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      }
+    });
+    acc.classList.add('is-open');
+    const h = acc.querySelector('.svc-header');
+    if (h) h.setAttribute('aria-expanded', 'true');
+  }
+
+  accordions.forEach(acc => {
+    const header = acc.querySelector('.svc-header');
+    header.addEventListener('click', () => {
+      if (acc.classList.contains('is-open')) {
+        acc.classList.remove('is-open');
+        header.setAttribute('aria-expanded', 'false');
+      } else {
+        openAccordion(acc);
+      }
+    });
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+
+  /* ── STICKY NAV TABS ────────────────────────────── */
+  const tabs = document.querySelectorAll('.svc-tab');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.target;
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      // open that accordion
+      openAccordion(target);
+
+      // smooth scroll with offset for sticky nav
+      const navH = document.getElementById('svc-nav').offsetHeight;
+      const stickyNav = 68; // main nav
+      const y = target.getBoundingClientRect().top + window.scrollY - stickyNav - navH - 12;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // update active tab on scroll
+  const updateTab = () => {
+    const navH = document.getElementById('svc-nav').offsetHeight + 68 + 30;
+    let current = null;
+    accordions.forEach(acc => {
+      const rect = acc.getBoundingClientRect();
+      if (rect.top <= navH) current = acc.id;
+    });
+    if (current) {
+      tabs.forEach(t => {
+        t.classList.toggle('active', t.dataset.target === current);
+      });
+    }
+  };
+  window.addEventListener('scroll', updateTab, { passive: true });
+
+  /* ── SCROLL REVEAL ──────────────────────────────── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .process-step').forEach(el => io.observe(el));
+
+})();
+</script>
