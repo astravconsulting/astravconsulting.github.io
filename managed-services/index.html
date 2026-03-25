@@ -1,10 +1,618 @@
 ---
 title: Managed Services
 description: Managed Services
+layout: default
 ---
 
-<!-- v2.0 -->
-<!-- PAGE HERO -->
+<style>
+/* ═══════════════════════════════════════════════════
+   PAGE TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --ms-teal-glow: rgba(0,194,203,0.12);
+  --ms-blue-glow: rgba(26,111,255,0.14);
+}
+
+/* ═══════════════════════════════════════════════════
+   GLOBAL HELPERS
+═══════════════════════════════════════════════════ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(26,111,255,0.10);
+  border: 1px solid rgba(26,111,255,0.28);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 1.25rem;
+}
+
+.grad {
+  background: linear-gradient(90deg, var(--blue-lt), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════ */
+.page-hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 11rem 2rem 6rem;
+  overflow: hidden;
+}
+.page-hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+.page-hero h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  line-height: 1.06;
+  margin-bottom: 1.1rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+/* live status bar */
+.hero-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 0.7rem 2rem;
+  margin: 0 auto 2.5rem;
+  width: fit-content;
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--off-white);
+  white-space: nowrap;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+.status-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.1);
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: none; }
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ═══════════════════════════════════════════════════
+   TRUST STRIP
+═══════════════════════════════════════════════════ */
+#trust-strip {
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--navy2);
+}
+.trust-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.trust-stat {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.trust-stat:last-child { border-right: none; }
+.trust-val {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  line-height: 1;
+  background: linear-gradient(135deg, var(--white) 40%, var(--blue-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.trust-label {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ═══════════════════════════════════════════════════
+   MANAGED OVERVIEW (hero 2-col)
+═══════════════════════════════════════════════════ */
+#managed-overview {
+  padding: 5.5rem 2rem;
+}
+.overview-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: start;
+}
+.overview-left .tag { display: inline-flex; }
+.overview-left h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.overview-lead {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+/* service pills list */
+.msvc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.msvc-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  cursor: default;
+}
+.msvc-item:hover {
+  border-color: rgba(26,111,255,0.3);
+  background: rgba(26,111,255,0.05);
+  transform: translateX(4px);
+}
+.msvc-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(26,111,255,0.1);
+  border: 1px solid rgba(26,111,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.msvc-text {}
+.msvc-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.1rem;
+}
+.msvc-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* right sticky card */
+.overview-card {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  position: sticky;
+  top: 100px;
+}
+.oc-head {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.75rem;
+}
+.oc-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 1.25rem;
+}
+.feature-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+.fc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--off-white);
+  line-height: 1.5;
+}
+.fc-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.35);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.fc-check svg { display: block; }
+.oc-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.5rem 0;
+}
+.oc-integrations {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.oc-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.oc-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--teal);
+  background: rgba(0,194,203,0.08);
+  border: 1px solid rgba(0,194,203,0.2);
+  border-radius: 6px;
+  padding: 0.25rem 0.65rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   WHAT'S INCLUDED
+═══════════════════════════════════════════════════ */
+#whats-included {
+  padding: 5.5rem 2rem;
+  background: var(--navy2);
+  border-top: 1px solid var(--border);
+}
+.wi-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.wi-inner h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.wi-inner .sec-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+.inc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.inc-card {
+  background: var(--navy);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.inc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.inc-card:hover { background: var(--navy3); }
+.inc-card:hover::before { opacity: 1; }
+.inc-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(26,111,255,0.1);
+  border: 1px solid rgba(26,111,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.inc-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.inc-card p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   HOW IT WORKS — VERTICAL TIMELINE
+═══════════════════════════════════════════════════ */
+#how-it-works {
+  padding: 5.5rem 2rem;
+}
+.hiw-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.hiw-left {}
+.hiw-left h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.hiw-left p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 1rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 24px;
+  bottom: 24px;
+  width: 1px;
+  background: linear-gradient(180deg,
+    rgba(26,111,255,0.5) 0%,
+    rgba(0,194,203,0.5) 70%,
+    transparent 100%);
+}
+.tl-step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.tl-step.visible { opacity: 1; transform: none; }
+
+.tl-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--navy2);
+  border: 2px solid rgba(26,111,255,0.35);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.tl-step:hover .tl-circle {
+  border-color: var(--blue-lt);
+  box-shadow: 0 0 24px rgba(26,111,255,0.3);
+}
+.tl-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--blue-lt);
+  letter-spacing: 0.05em;
+}
+.tl-content { padding-top: 0.6rem; }
+.tl-content h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+.tl-content p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════════════ */
+#contact-cta {
+  position: relative;
+  padding: 7rem 2rem;
+  text-align: center;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+.cta-inner {
+  position: relative; z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.cta-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+  display: block;
+}
+.cta-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.1rem;
+}
+.cta-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.75;
+}
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════ */
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: inherit;
+}
+.btn-primary:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 32px rgba(26,111,255,0.45);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--off-white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.13);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .overview-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .overview-card { position: static; }
+  .hiw-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+  .trust-inner { grid-template-columns: 1fr 1fr; }
+  .trust-stat:nth-child(2) { border-right: none; }
+  .trust-stat:nth-child(3) { border-top: 1px solid var(--border); border-right: 1px solid var(--border); }
+  .trust-stat:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+}
+@media (max-width: 768px) {
+  #managed-overview, #whats-included, #how-it-works, #contact-cta { padding: 4rem 1.5rem; }
+  .inc-grid { grid-template-columns: 1fr; border-radius: 14px; }
+  .trust-inner { grid-template-columns: 1fr 1fr; }
+  .hero-status-bar { flex-direction: column; gap: 0.75rem; border-radius: 16px; }
+  .status-sep { width: 40px; height: 1px; }
+  .timeline::before { left: 22px; }
+}
+@media (max-width: 480px) {
+  .trust-inner { grid-template-columns: 1fr 1fr; }
+  .inc-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
 <section class="page-hero">
   <div class="orb orb-1"></div>
   <div class="hero-grid"></div>
@@ -12,157 +620,274 @@ description: Managed Services
   <div class="page-hero-content">
     <div class="tag">Managed Security Services</div>
     <h1>Always on.<br /><span class="grad">Always protected.</span></h1>
-    <p class="hero-sub">24×7 continuous management of your CDN, cloud, and API security — monitoring, optimization, threat response, and expert support.</p>
+    <p class="hero-sub">24×7 continuous management of your CDN, cloud, and API security — monitoring, expert response, and ongoing optimization so you never have to worry.</p>
+    <div class="hero-status-bar">
+      <div class="status-item">
+        <span class="status-dot"></span> All systems operational
+      </div>
+      <div class="status-sep"></div>
+      <div class="status-item">⚡ &lt;15 min incident response</div>
+      <div class="status-sep"></div>
+      <div class="status-item">🔒 24 × 7 × 365 coverage</div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="/contact/" class="btn-primary">Get Protected Today</a>
+      <a href="/services/" class="btn-ghost">Explore Services</a>
+    </div>
   </div>
 </section>
 
-<!-- MANAGED SERVICES OVERVIEW -->
+<!-- ══════════════════════════════════════════════
+     TRUST STRIP
+══════════════════════════════════════════════ -->
+<div id="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-stat reveal">
+      <div class="trust-val">11+</div>
+      <div class="trust-label">Platforms supported</div>
+    </div>
+    <div class="trust-stat reveal" style="transition-delay:0.1s">
+      <div class="trust-val">24/7</div>
+      <div class="trust-label">Monitoring coverage</div>
+    </div>
+    <div class="trust-stat reveal" style="transition-delay:0.2s">
+      <div class="trust-val">&lt;15m</div>
+      <div class="trust-label">SLA response time</div>
+    </div>
+    <div class="trust-stat reveal" style="transition-delay:0.3s">
+      <div class="trust-val">100%</div>
+      <div class="trust-label">Dedicated engineers</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MANAGED OVERVIEW
+══════════════════════════════════════════════ -->
 <section id="managed-overview">
-  <div class="managed-layout">
-    <div class="managed-cards">
-      <div class="msvc">
-        <div class="msvc-icon">🛡️</div>
-        <div>
-          <div class="msvc-title">Continuous CDN Security Management</div>
-          <div class="msvc-desc">Ongoing monitoring, maintenance, and optimization of CDN security configurations and policies across all your CDN platforms.</div>
+  <div class="overview-inner">
+
+    <!-- Left: service list -->
+    <div class="overview-left">
+      <div class="tag">What We Manage</div>
+      <h2>Your security layer,<br /><span class="grad">fully covered</span></h2>
+      <p class="overview-lead">We take complete ownership of your security operations — so your team stays focused on building, not firefighting.</p>
+
+      <div class="msvc-list">
+        <div class="msvc-item reveal">
+          <div class="msvc-icon">🛡️</div>
+          <div class="msvc-text">
+            <div class="msvc-title">CDN Security Management</div>
+            <div class="msvc-desc">Continuous WAF tuning, DDoS response, and policy optimization across Akamai, Cloudflare, Fastly, and more.</div>
+          </div>
         </div>
-      </div>
-      <div class="msvc">
-        <div class="msvc-icon">☁️</div>
-        <div>
-          <div class="msvc-title">Continuous Cloud Security Management</div>
-          <div class="msvc-desc">Proactive management of cloud infrastructure security, compliance monitoring, and threat mitigation across Linode, AWS, and Azure.</div>
+        <div class="msvc-item reveal" style="transition-delay:0.08s">
+          <div class="msvc-icon">☁️</div>
+          <div class="msvc-text">
+            <div class="msvc-title">Cloud Security Management</div>
+            <div class="msvc-desc">Proactive cloud posture management, IAM oversight, and threat mitigation across AWS, Azure, and Linode.</div>
+          </div>
         </div>
-      </div>
-      <div class="msvc">
-        <div class="msvc-icon">🔐</div>
-        <div>
-          <div class="msvc-title">Continuous API Security Management</div>
-          <div class="msvc-desc">Real-time API security monitoring, threat detection, and automated response to emerging vulnerabilities using Noname and Salt Security.</div>
+        <div class="msvc-item reveal" style="transition-delay:0.16s">
+          <div class="msvc-icon">🔐</div>
+          <div class="msvc-text">
+            <div class="msvc-title">API Security Management</div>
+            <div class="msvc-desc">Real-time API monitoring, threat detection, and automated response using Noname and Salt Security.</div>
+          </div>
         </div>
-      </div>
-      <div class="msvc">
-        <div class="msvc-icon">📡</div>
-        <div>
-          <div class="msvc-title">24×7 Monitoring & Operational Support</div>
-          <div class="msvc-desc">Round-the-clock security monitoring, incident response, and expert technical support services with SLA-backed response times.</div>
+        <div class="msvc-item reveal" style="transition-delay:0.24s">
+          <div class="msvc-icon">📡</div>
+          <div class="msvc-text">
+            <div class="msvc-title">24×7 Monitoring & Support</div>
+            <div class="msvc-desc">Round-the-clock security operations with SLA-backed incident response and dedicated engineer access.</div>
+          </div>
         </div>
-      </div>
-      <div class="msvc">
-        <div class="msvc-icon">⚙️</div>
-        <div>
-          <div class="msvc-title">Security Optimization & Policy Tuning</div>
-          <div class="msvc-desc">Ongoing analysis and refinement of security rules, policies, and configurations to stay ahead of evolving threats and optimize performance.</div>
+        <div class="msvc-item reveal" style="transition-delay:0.32s">
+          <div class="msvc-icon">⚙️</div>
+          <div class="msvc-text">
+            <div class="msvc-title">Security Optimization & Tuning</div>
+            <div class="msvc-desc">Ongoing rule refinement and configuration updates to stay ahead of evolving threats and shifting traffic patterns.</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="managed-right">
-      <div class="tag">Why Managed Services</div>
-      <h3 class="sec-title" style="font-size:1.9rem">Your security team,<br /><span class="grad">extended</span></h3>
-      <p>Our managed security services give you the expertise, tooling, and round-the-clock coverage of a world-class security team — without the cost of building one from scratch.</p>
-      <div class="feature-list">
-        <div class="feature-item">Proactive threat hunting & anomaly detection</div>
-        <div class="feature-item">SLA-backed incident response times</div>
-        <div class="feature-item">Dedicated security engineers, not call centers</div>
-        <div class="feature-item">Monthly reporting & executive briefings</div>
-        <div class="feature-item">Continuous policy tuning as threats evolve</div>
-        <div class="feature-item">Direct Slack or Teams integration</div>
+    <!-- Right: sticky value card -->
+    <div class="overview-card reveal" style="transition-delay:0.15s">
+      <div class="oc-head">Why Astrav Managed Services</div>
+      <div class="oc-title">A world-class security team — without the overhead</div>
+
+      <div class="feature-checklist">
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Dedicated engineers — not a call center
+        </div>
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          SLA-backed incident response times
+        </div>
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Proactive threat hunting & anomaly detection
+        </div>
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Monthly reports & executive briefings
+        </div>
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Direct Slack or Teams integration
+        </div>
+        <div class="fc-item">
+          <div class="fc-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4l2.5 2.5L9 1" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          Continuous tuning as threats evolve
+        </div>
       </div>
-      <a href="/contact/" class="btn-primary">Talk to an Expert</a>
+
+      <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center;">Talk to an Expert</a>
+
+      <div class="oc-divider"></div>
+      <div class="oc-integrations">Platforms covered</div>
+      <div class="oc-badges">
+        <span class="oc-badge">Akamai</span>
+        <span class="oc-badge">Cloudflare</span>
+        <span class="oc-badge">AWS</span>
+        <span class="oc-badge">Azure</span>
+        <span class="oc-badge">Fastly</span>
+        <span class="oc-badge">Noname</span>
+        <span class="oc-badge">Salt Security</span>
+        <span class="oc-badge">Imperva</span>
+      </div>
     </div>
+
   </div>
 </section>
 
-<!-- WHAT'S INCLUDED -->
+<!-- ══════════════════════════════════════════════
+     WHAT'S INCLUDED
+══════════════════════════════════════════════ -->
 <section id="whats-included">
-  <div class="tag">What's Included</div>
-  <h2 class="sec-title">Complete managed<br /><span class="grad">security coverage</span></h2>
+  <div class="wi-inner">
+    <div class="tag reveal">What's Included</div>
+    <h2 class="reveal">Complete managed <span class="grad">security coverage</span></h2>
+    <p class="sec-sub reveal">Everything you need, fully handled. Nothing left exposed.</p>
 
-  <div class="included-grid">
-    <div class="inc-card">
-      <div class="inc-icon">👁️</div>
-      <h3>24×7 Security Monitoring</h3>
-      <p>Real-time monitoring of all security events, traffic patterns, and threat indicators across your CDN, cloud, and API infrastructure.</p>
-    </div>
-    <div class="inc-card">
-      <div class="inc-icon">🚨</div>
-      <h3>Incident Response</h3>
-      <p>Immediate response to security incidents with SLA-backed resolution times. Our team handles triage, containment, and remediation.</p>
-    </div>
-    <div class="inc-card">
-      <div class="inc-icon">🔧</div>
-      <h3>Configuration Management</h3>
-      <p>Ongoing tuning and optimization of WAF rules, DDoS thresholds, bot policies, IAM controls, and API security policies.</p>
-    </div>
-    <div class="inc-card">
-      <div class="inc-icon">📊</div>
-      <h3>Threat Intelligence</h3>
-      <p>Integration with global threat feeds and proactive updates to your security posture based on emerging attack vectors.</p>
-    </div>
-    <div class="inc-card">
-      <div class="inc-icon">📈</div>
-      <h3>Performance Optimization</h3>
-      <p>Continuous monitoring and tuning of cache policies, origin configurations, and routing to maximize performance while maintaining security.</p>
-    </div>
-    <div class="inc-card">
-      <div class="inc-icon">📋</div>
-      <h3>Compliance & Reporting</h3>
-      <p>Monthly executive reports, compliance monitoring, and audit trail documentation for SOC 2, PCI-DSS, HIPAA, and other frameworks.</p>
+    <div class="inc-grid">
+      <div class="inc-card reveal">
+        <div class="inc-icon-wrap">👁️</div>
+        <h3>24×7 Security Monitoring</h3>
+        <p>Real-time visibility across CDN, cloud, and API layers — every event, every threat, around the clock.</p>
+      </div>
+      <div class="inc-card reveal" style="transition-delay:0.07s">
+        <div class="inc-icon-wrap">🚨</div>
+        <h3>Incident Response</h3>
+        <p>Immediate triage and containment by dedicated engineers — not a ticket queue — with SLA-backed resolution.</p>
+      </div>
+      <div class="inc-card reveal" style="transition-delay:0.14s">
+        <div class="inc-icon-wrap">🔧</div>
+        <h3>Configuration Management</h3>
+        <p>Ongoing tuning of WAF rules, DDoS thresholds, bot policies, IAM controls, and API security configurations.</p>
+      </div>
+      <div class="inc-card reveal" style="transition-delay:0.21s">
+        <div class="inc-icon-wrap">📊</div>
+        <h3>Threat Intelligence</h3>
+        <p>Global threat feeds integrated directly into your defenses — your posture updates before attackers move.</p>
+      </div>
+      <div class="inc-card reveal" style="transition-delay:0.28s">
+        <div class="inc-icon-wrap">📈</div>
+        <h3>Performance Optimization</h3>
+        <p>Continuous cache, origin, and routing tuning — security that never compromises speed.</p>
+      </div>
+      <div class="inc-card reveal" style="transition-delay:0.35s">
+        <div class="inc-icon-wrap">📋</div>
+        <h3>Compliance & Reporting</h3>
+        <p>Monthly executive reports plus audit documentation for SOC 2, PCI-DSS, HIPAA, and more.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- ══════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════ -->
 <section id="how-it-works">
-  <div class="hiw-layout">
-    <div>
-      <div class="tag">How It Works</div>
-      <h2 class="sec-title">Seamless onboarding.<br /><span class="grad">Immediate value.</span></h2>
-      <p class="sec-desc" style="max-width:100%">We handle the entire onboarding process and integrate seamlessly with your existing tools and workflows.</p>
+  <div class="hiw-inner">
+
+    <div class="hiw-left">
+      <div class="tag reveal">How It Works</div>
+      <h2 class="reveal">Seamless onboarding.<br /><span class="grad">Immediate value.</span></h2>
+      <p class="reveal">We integrate with your existing stack and tools — no rip-and-replace, no long procurement cycles. Most clients are fully live within two weeks.</p>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div>
-          <div class="step-title">Initial Assessment</div>
-          <div class="step-desc">We audit your current infrastructure, security controls, and monitoring setup to establish a baseline.</div>
+    <div class="timeline">
+      <div class="tl-step" style="transition-delay:0.05s">
+        <div class="tl-circle"><span class="tl-num">01</span></div>
+        <div class="tl-content">
+          <h3>Initial Assessment</h3>
+          <p>We audit your infrastructure, existing controls, and monitoring setup to establish a clear security baseline and identify gaps.</p>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div>
-          <div class="step-title">Integration & Setup</div>
-          <div class="step-desc">Our team integrates with your platforms, sets up monitoring, and configures alerting and escalation workflows.</div>
+      <div class="tl-step" style="transition-delay:0.15s">
+        <div class="tl-circle"><span class="tl-num">02</span></div>
+        <div class="tl-content">
+          <h3>Integration & Setup</h3>
+          <p>Our team connects to your platforms, configures monitoring, and sets up alerting and escalation workflows aligned to your team.</p>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div>
-          <div class="step-title">Go-Live & Handoff</div>
-          <div class="step-desc">We go live with 24×7 monitoring and conduct a handoff meeting with your team to review processes and contacts.</div>
+      <div class="tl-step" style="transition-delay:0.25s">
+        <div class="tl-circle"><span class="tl-num">03</span></div>
+        <div class="tl-content">
+          <h3>Go-Live & Handoff</h3>
+          <p>24×7 coverage starts immediately. We brief your team on escalation paths, communication channels, and reporting cadence.</p>
         </div>
       </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div>
-          <div class="step-title">Ongoing Management</div>
-          <div class="step-desc">Continuous monitoring, optimization, and quarterly business reviews to ensure your security posture evolves with your business.</div>
+      <div class="tl-step" style="transition-delay:0.35s">
+        <div class="tl-circle"><span class="tl-num">04</span></div>
+        <div class="tl-content">
+          <h3>Ongoing Management</h3>
+          <p>Continuous monitoring, optimization, and quarterly business reviews ensure your security posture evolves with your business.</p>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ══════════════════════════════════════════════
+     CTA
+══════════════════════════════════════════════ -->
 <section id="contact-cta">
   <div class="hero-grid"></div>
+  <div class="orb orb-2" style="bottom:-200px;right:-100px;opacity:0.6"></div>
   <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
   <div class="cta-inner">
-    <div class="cta-label">Ready for 24×7 Protection?</div>
+    <span class="cta-label">Ready for 24×7 Protection?</span>
     <h2 class="cta-title">Let's build your<br /><span class="grad">managed security plan</span></h2>
-    <p class="cta-desc">Schedule a consultation to discuss your infrastructure, security requirements, and how our managed services can give you complete peace of mind.</p>
+    <p class="cta-desc">Schedule a consultation to discuss your infrastructure and how we can give you complete, continuous peace of mind.</p>
     <div class="cta-actions">
       <a href="/contact/" class="btn-primary">Get in Touch</a>
       <a href="/services/" class="btn-ghost">View All Services</a>
@@ -170,31 +895,43 @@ description: Managed Services
   </div>
 </section>
 
-
-
-  <!-- FAQ Schema for rich snippets -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is included in Astrav Consulting's managed security services?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our managed security services include 24×7 monitoring, incident response, configuration management, threat intelligence, performance optimization, and monthly compliance reporting for CDN, cloud, and API infrastructure."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Astrav Consulting offer SLA-backed response times?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Our managed security plans include SLA-backed incident response times with proactive threat hunting and 24×7 support."
-        }
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is included in Astrav Consulting's managed security services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our managed security services include 24×7 monitoring, incident response, configuration management, threat intelligence, performance optimization, and monthly compliance reporting for CDN, cloud, and API infrastructure."
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "Question",
+      "name": "Does Astrav Consulting offer SLA-backed response times?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our managed security plans include SLA-backed incident response times with proactive threat hunting and 24×7 support."
+      }
+    }
+  ]
+}
+</script>
 
+<script>
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .tl-step').forEach(el => io.observe(el));
+})();
+</script>
