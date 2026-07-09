@@ -5,7 +5,7 @@ author: Astrav Consulting
 date: 2026-07-09
 categories: [CDN Security, WAF]
 read_time: 8
-image: https://www.astravconsulting.com/images/blog_posts/2026-07-09.svg
+image: https://www.astravconsulting.com/images/blog_posts/2026-07-09.png
 ---
 
 ## The Challenge
