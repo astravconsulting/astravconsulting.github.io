@@ -600,6 +600,20 @@ section { padding: 4.5rem 4rem; }
    PRACTICES / MODELS
    ══════════════════════════════════════════════════════════════════════════ */
 
+#practices,
+#approach,
+#models {
+  padding: 4.5rem 4rem;
+}
+
+.practices-grid,
+.approach-layout,
+.models-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #practices { background: var(--navy2); }
 
 .practices-grid {
