@@ -749,3 +749,31 @@ document.getElementById('assessmentForm').addEventListener('submit', function(e)
   }, 100);
 });
 </script>
+
+/* Override global main padding */
+main {
+    padding: 0 !important;
+}
+
+#assessment-hero {
+    padding-top: 10rem;
+}
+
+#assessment-tool {
+    padding: 5rem 2rem;
+}
+
+#assessment-tool .tool-container {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 4rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    #assessment-tool .tool-container {
+        grid-template-columns: 1fr;
+    }
+}
