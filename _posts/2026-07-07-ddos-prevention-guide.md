@@ -5,7 +5,7 @@ author: Astrav Consulting
 date: 2026-07-07
 categories: [DDoS, Cloud Security]
 read_time: 7
-image: [/images/blog/ddos-mitigation.jpg](https://www.astravconsulting.com/images/blog_posts/2026-07-07.svg)
+image: https://www.astravconsulting.com/images/blog_posts/2026-07-07.svg
 ---
 
 ## Understanding Modern DDoS Attacks
