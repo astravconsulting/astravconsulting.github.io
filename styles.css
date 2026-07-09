@@ -602,7 +602,19 @@ section { padding: 4.5rem 4rem; }
 
 #practices,
 #approach,
-#models {
+#models,
+#process,
+#contact-main,
+#alt-contact,
+#why-main,
+#approach-detail,
+#platform-expertise,
+#assessments,
+#advisory-process,
+#why-advisory,
+#managed-overview,
+#whats-included,
+#how-it-works {
   padding: 4.5rem 4rem;
 }
 
