@@ -1,0 +1,751 @@
+---
+title: Quick Risk Assessment
+description: Identify security gaps in your CDN, cloud, and API infrastructure in 5 minutes
+layout: default
+---
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   RISK ASSESSMENT TOOL STYLES
+═══════════════════════════════════════════════════════════════ */
+#assessment-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.assessment-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.assessment-hero-content h1 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.assessment-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ASSESSMENT TOOL SECTION
+═══════════════════════════════════════════════════════════════ */
+#assessment-tool {
+  padding: 5rem 2rem;
+  background: var(--navy2);
+}
+
+.tool-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.tool-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tool-intro h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.tool-intro p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.tool-benefit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tool-benefit-list li {
+  font-size: 0.9rem;
+  color: var(--off-white);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-benefit-list li::before {
+  content: '✓';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0,194,203,0.15);
+  border: 1px solid rgba(0,194,203,0.3);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FORM STYLES
+═══════════════════════════════════════════════════════════════ */
+.assessment-form {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.form-group.radio-group {
+  gap: 0.75rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.radio-option:hover {
+  background: rgba(26,111,255,0.05);
+}
+
+.radio-option input[type="radio"] {
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.radio-option label {
+  cursor: pointer;
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--off-white);
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(26,111,255,0.5);
+  background: rgba(255,255,255,0.08);
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+.form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 0;
+}
+
+.submit-btn {
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: inherit;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 24px rgba(26,111,255,0.4);
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  background: rgba(26,111,255,0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.form-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESULTS SECTION
+═══════════════════════════════════════════════════════════════ */
+#assessment-results {
+  display: none;
+  padding: 5rem 2rem;
+}
+
+#assessment-results.show {
+  display: block;
+}
+
+.results-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.results-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.risk-score-box {
+  background: linear-gradient(135deg, rgba(26,111,255,0.1), rgba(0,194,203,0.1));
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.risk-score-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.risk-score-value {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--blue-lt), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.risk-score-interpretation {
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.risk-findings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.finding-card {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+.finding-card.critical {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.finding-card.high {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.finding-card.medium {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.finding-severity {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.finding-card.critical .finding-severity {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.finding-card.high .finding-severity {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+}
+
+.finding-card.medium .finding-severity {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.finding-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.finding-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.results-cta {
+  background: linear-gradient(135deg, rgba(26,111,255,0.1), rgba(0,194,203,0.1));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.results-cta h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.results-cta p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #assessment-hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+  
+  .tool-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .risk-findings {
+    grid-template-columns: 1fr;
+  }
+  
+  #assessment-tool {
+    padding: 4rem 1.5rem;
+  }
+  
+  .risk-score-value {
+    font-size: 2.5rem;
+  }
+  
+  .results-actions {
+    flex-direction: column;
+  }
+  
+  .results-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+<!-- HERO -->
+<section id="assessment-hero">
+  <div class="orb orb-1"></div>
+  <div class="hero-grid"></div>
+  <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
+  
+  <div class="assessment-hero-content">
+    <h1>Know your<br /><span class="grad">security gaps</span></h1>
+    <p class="assessment-sub">
+      Get a quick, personalized risk assessment for your CDN, cloud, and API infrastructure. 5 minutes. No obligation.
+    </p>
+  </div>
+</section>
+
+<!-- ASSESSMENT TOOL -->
+<section id="assessment-tool">
+  <div class="tool-container">
+    <div class="tool-intro">
+      <h2>Quick Security<br />Risk Assessment</h2>
+      <p>Answer 5 quick questions about your infrastructure and get an instant risk score with personalized recommendations.</p>
+      
+      <ul class="tool-benefit-list">
+        <li>5 minutes to complete</li>
+        <li>Instant risk scoring</li>
+        <li>Personalized findings</li>
+        <li>No credit card required</li>
+      </ul>
+    </div>
+    
+    <form id="assessmentForm" class="assessment-form">
+      <!-- Q1: Primary Platform -->
+      <div class="form-group">
+        <label>What's your primary platform?</label>
+        <div class="form-group radio-group">
+          <div class="radio-option">
+            <input type="radio" id="platform_akamai" name="platform" value="akamai">
+            <label for="platform_akamai">Akamai</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_cloudflare" name="platform" value="cloudflare">
+            <label for="platform_cloudflare">Cloudflare</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_aws" name="platform" value="aws">
+            <label for="platform_aws">AWS / CloudFront</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_azure" name="platform" value="azure">
+            <label for="platform_azure">Azure</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_multi" name="platform" value="multi">
+            <label for="platform_multi">Multiple platforms</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_other" name="platform" value="other">
+            <label for="platform_other">Other / Not sure</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-divider"></div>
+      
+      <!-- Q2: WAF Configuration -->
+      <div class="form-group">
+        <label>Do you have a WAF deployed?</label>
+        <div class="form-group radio-group">
+          <div class="radio-option">
+            <input type="radio" id="waf_none" name="waf" value="none">
+            <label for="waf_none">No WAF</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="waf_basic" name="waf" value="basic">
+            <label for="waf_basic">Basic / default rules only</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="waf_managed" name="waf" value="managed">
+            <label for="waf_managed">Managed rules active</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="waf_custom" name="waf" value="custom">
+            <label for="waf_custom">Custom rules + tuned</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-divider"></div>
+      
+      <!-- Q3: DDoS Protection -->
+      <div class="form-group">
+        <label>How is DDoS protection configured?</label>
+        <div class="form-group radio-group">
+          <div class="radio-option">
+            <input type="radio" id="ddos_none" name="ddos" value="none">
+            <label for="ddos_none">No active DDoS protection</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="ddos_default" name="ddos" value="default">
+            <label for="ddos_default">Default/automatic protection</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="ddos_tuned" name="ddos" value="tuned">
+            <label for="ddos_tuned">Custom thresholds set</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="ddos_dedicated" name="ddos" value="dedicated">
+            <label for="ddos_dedicated">Dedicated DDoS service + monitoring</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-divider"></div>
+      
+      <!-- Q4: API Security -->
+      <div class="form-group">
+        <label>Do you have API security tools deployed?</label>
+        <div class="form-group radio-group">
+          <div class="radio-option">
+            <input type="radio" id="api_none" name="api_sec" value="none">
+            <label for="api_none">No API security tools</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="api_basic" name="api_sec" value="basic">
+            <label for="api_basic">Rate limiting only</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="api_discovery" name="api_sec" value="discovery">
+            <label for="api_discovery">API discovery / inventory</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="api_full" name="api_sec" value="full">
+            <label for="api_full">Full API security platform</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-divider"></div>
+      
+      <!-- Q5: Monitoring & Response -->
+      <div class="form-group">
+        <label>How is security monitoring handled?</label>
+        <div class="form-group radio-group">
+          <div class="radio-option">
+            <input type="radio" id="monitoring_none" name="monitoring" value="none">
+            <label for="monitoring_none">Manual / ad-hoc checks</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="monitoring_basic" name="monitoring" value="basic">
+            <label for="monitoring_basic">Basic alerts set up</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="monitoring_24x7" name="monitoring" value="24x7">
+            <label for="monitoring_24x7">24×7 monitoring in-house</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="monitoring_managed" name="monitoring" value="managed">
+            <label for="monitoring_managed">Managed 24×7 SOC monitoring</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-divider"></div>
+      
+      <!-- Contact Info -->
+      <div class="form-group">
+        <label for="email">Your email (to send results)</label>
+        <input type="email" id="email" name="email" placeholder="name@company.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="company">Company name</label>
+        <input type="text" id="company" name="company" placeholder="Your company" required>
+      </div>
+      
+      <button type="submit" class="submit-btn">Get My Risk Score</button>
+      <p class="form-note">We'll send your results to your email and optionally contact you to discuss findings.</p>
+    </form>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="assessment-results">
+  <div class="results-container">
+    <div class="results-header">
+      <h2>Your Security Risk Assessment</h2>
+    </div>
+    
+    <div class="risk-score-box">
+      <div class="risk-score-label">Overall Risk Score</div>
+      <div class="risk-score-value" id="riskScore">0</div>
+      <div class="risk-score-interpretation" id="riskInterpretation">Calculating...</div>
+    </div>
+    
+    <div class="risk-findings" id="findings"></div>
+    
+    <div class="results-cta">
+      <h3>Next Steps</h3>
+      <p>Your results have been sent to your email. Ready to close these gaps? Our team can help with a customized security strategy.</p>
+      <div class="results-actions">
+        <a href="/contact/" class="btn-primary">Schedule a Consultation</a>
+        <a href="/services/" class="btn-ghost">Explore Our Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+  const answers = {
+    platform: formData.get('platform'),
+    waf: formData.get('waf'),
+    ddos: formData.get('ddos'),
+    api_sec: formData.get('api_sec'),
+    monitoring: formData.get('monitoring'),
+    email: formData.get('email'),
+    company: formData.get('company')
+  };
+  
+  // Calculate risk score (0-100)
+  let score = 0;
+  
+  // Platform (5-15 points)
+  const platformScore = { 'akamai': 5, 'cloudflare': 5, 'aws': 5, 'azure': 5, 'multi': 10, 'other': 15 };
+  score += platformScore[answers.platform] || 0;
+  
+  // WAF (10-30 points)
+  const wafScore = { 'none': 30, 'basic': 20, 'managed': 10, 'custom': 5 };
+  score += wafScore[answers.waf] || 0;
+  
+  // DDoS (10-30 points)
+  const ddosScore = { 'none': 30, 'default': 20, 'tuned': 10, 'dedicated': 5 };
+  score += ddosScore[answers.ddos] || 0;
+  
+  // API Security (10-25 points)
+  const apiScore = { 'none': 25, 'basic': 15, 'discovery': 10, 'full': 5 };
+  score += apiScore[answers.api_sec] || 0;
+  
+  // Monitoring (10-25 points)
+  const monitoringScore = { 'none': 25, 'basic': 15, '24x7': 10, 'managed': 5 };
+  score += monitoringScore[answers.monitoring] || 0;
+  
+  // Generate findings based on answers
+  const findings = [];
+  
+  if (answers.platform === 'other') {
+    findings.push({
+      title: 'Platform Clarity Needed',
+      description: 'Unclear platform strategy. Recommendation: Conduct platform audit to identify security best practices.',
+      severity: 'high'
+    });
+  }
+  
+  if (answers.waf === 'none' || answers.waf === 'basic') {
+    findings.push({
+      title: 'WAF Configuration Gap',
+      description: 'WAF is either missing or using defaults. Critical for blocking SQL injection, XSS, and other OWASP Top 10 attacks.',
+      severity: 'critical'
+    });
+  }
+  
+  if (answers.ddos === 'none' || answers.ddos === 'default') {
+    findings.push({
+      title: 'DDoS Protection Insufficient',
+      description: 'Default DDoS protection may not handle sophisticated attacks. Consider proactive tuning and custom thresholds.',
+      severity: 'high'
+    });
+  }
+  
+  if (answers.api_sec === 'none' || answers.api_sec === 'basic') {
+    findings.push({
+      title: 'API Security Visibility Gap',
+      description: 'Limited API security controls. APIs are attack surface; recommend discovery and continuous monitoring.',
+      severity: 'high'
+    });
+  }
+  
+  if (answers.monitoring === 'none' || answers.monitoring === 'basic') {
+    findings.push({
+      title: 'Security Monitoring Gaps',
+      description: 'Reactive or manual monitoring leaves blind spots. 24×7 monitoring recommended for enterprise environments.',
+      severity: 'critical'
+    });
+  }
+  
+  // Display results
+  document.getElementById('assessmentForm').style.display = 'none';
+  document.getElementById('assessment-results').classList.add('show');
+  
+  document.getElementById('riskScore').textContent = score;
+  
+  let interpretation = '';
+  if (score >= 75) interpretation = '🔴 Critical Risk';
+  else if (score >= 50) interpretation = '🟠 High Risk';
+  else if (score >= 25) interpretation = '🟡 Medium Risk';
+  else interpretation = '🟢 Moderate Risk';
+  
+  document.getElementById('riskInterpretation').textContent = interpretation;
+  
+  // Display findings
+  const findingsHtml = findings.map(f => `
+    <div class="finding-card ${f.severity}">
+      <div class="finding-severity">${f.severity}</div>
+      <h4>${f.title}</h4>
+      <p>${f.description}</p>
+    </div>
+  `).join('');
+  
+  document.getElementById('findings').innerHTML = findingsHtml;
+  
+  // Scroll to results
+  setTimeout(() => {
+    document.getElementById('assessment-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+});
+</script>
