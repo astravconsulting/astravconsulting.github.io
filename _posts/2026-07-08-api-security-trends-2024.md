@@ -169,7 +169,7 @@ Astrav Consulting provides API security assessments and continuous monitoring. W
 - Identify vulnerabilities
 - Implement defense-in-depth strategies
 
-[Schedule a free API security assessment →](/tools/risk-assessment/)
+
 
 ---
 
