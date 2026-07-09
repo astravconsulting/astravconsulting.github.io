@@ -84,6 +84,12 @@ layout: default
   padding: 0 2rem;
   overflow-x: auto;
   scrollbar-width: none;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+#svc-nav.svc-nav-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 #svc-nav::-webkit-scrollbar { display: none; }
 .svc-nav-inner {
@@ -946,6 +952,20 @@ layout: default
     }
   };
   window.addEventListener('scroll', updateTab, { passive: true });
+
+  /* ── FADE STICKY NAV BEFORE "HOW WE DELIVER" ──────── */
+  const svcNav = document.getElementById('svc-nav');
+  const processSection = document.getElementById('process');
+
+  const updateNavVisibility = () => {
+    if (!processSection) return;
+    const stickyOffset = 68 + svcNav.offsetHeight; // main nav + sticky tab bar
+    const processTop = processSection.getBoundingClientRect().top;
+    const shouldHide = processTop <= stickyOffset;
+    svcNav.classList.toggle('svc-nav-hidden', shouldHide);
+  };
+  window.addEventListener('scroll', updateNavVisibility, { passive: true });
+  updateNavVisibility();
 
   /* ── SCROLL REVEAL ──────────────────────────────── */
   const io = new IntersectionObserver((entries) => {
