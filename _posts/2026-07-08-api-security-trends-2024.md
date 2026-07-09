@@ -5,7 +5,7 @@ author: Astrav Consulting
 date: 2026-07-08
 categories: [API Security, Trends]
 read_time: 6
-image: /images/blog/api-trends.jpg
+image: https://www.astravconsulting.com/images/blog_posts/2026-07-08.svg
 ---
 
 ## The API Security Problem
