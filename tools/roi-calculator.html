@@ -1,0 +1,559 @@
+---
+title: Managed Services ROI Calculator
+description: See the financial impact of professional security management on your infrastructure
+layout: default
+---
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   ROI CALCULATOR STYLES
+═══════════════════════════════════════════════════════════════ */
+#roi-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.roi-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.roi-hero-content h1 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.roi-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CALCULATOR SECTION
+═══════════════════════════════════════════════════════════════ */
+#roi-calculator {
+  padding: 5rem 2rem;
+  background: var(--navy2);
+}
+
+.calc-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INPUT SECTION
+═══════════════════════════════════════════════════════════════ */
+.calc-inputs {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.input-group small {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.range-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.range-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(26,111,255,0.2), rgba(0,194,203,0.2));
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--blue);
+  cursor: pointer;
+  border: 2px solid var(--navy3);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 12px rgba(26,111,255,0.6);
+}
+
+.range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--blue);
+  cursor: pointer;
+  border: 2px solid var(--navy3);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.range-slider::-moz-range-thumb:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 12px rgba(26,111,255,0.6);
+}
+
+.range-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--blue-lt);
+  text-align: right;
+}
+
+input[type="number"] {
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: rgba(26,111,255,0.5);
+}
+
+.input-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESULTS SECTION
+═══════════════════════════════════════════════════════════════ */
+.calc-results {
+  background: linear-gradient(135deg, rgba(26,111,255,0.08), rgba(0,194,203,0.08));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.result-box {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  text-align: center;
+}
+
+.result-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.result-value {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--blue-lt), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.result-subtext {
+  font-size: 0.85rem;
+  color: var(--off-white);
+}
+
+.breakdown-section {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.breakdown-section h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+}
+
+.breakdown-item:last-child {
+  border-bottom: none;
+}
+
+.breakdown-label {
+  color: var(--muted);
+}
+
+.breakdown-value {
+  color: var(--off-white);
+  font-weight: 600;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, rgba(26,111,255,0.12), rgba(0,194,203,0.08));
+  border: 1px solid rgba(26,111,255,0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.cta-section p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.cta-section .btn-primary {
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   METHODOLOGY
+═══════════════════════════════════════════════════════════════ */
+#roi-methodology {
+  padding: 5rem 2rem;
+}
+
+.methodology-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.methodology-card {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: background 0.3s;
+}
+
+.methodology-card:hover {
+  background: var(--navy3);
+}
+
+.methodology-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.methodology-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.methodology-card p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #roi-hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+  
+  .calc-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .methodology-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  #roi-calculator,
+  #roi-methodology {
+    padding: 4rem 1.5rem;
+  }
+  
+  .result-value {
+    font-size: 1.5rem;
+  }
+}
+</style>
+
+<!-- HERO -->
+<section id="roi-hero">
+  <div class="orb orb-1"></div>
+  <div class="hero-grid"></div>
+  <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
+  
+  <div class="roi-hero-content">
+    <h1>Calculate your<br /><span class="grad">security ROI</span></h1>
+    <p class="roi-sub">
+      See how managed security services impact your bottom line through incident prevention, operational efficiency, and risk mitigation.
+    </p>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="roi-calculator">
+  <div class="calc-container">
+    <!-- Inputs -->
+    <div class="calc-inputs">
+      <h2 style="font-size: 1.4rem; color: var(--white); margin-bottom: 0.5rem;">Your Infrastructure</h2>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Tell us about your environment</p>
+      
+      <div class="range-input-group">
+        <div class="input-group">
+          <label>Annual Revenue at Risk*</label>
+          <small>Estimate annual revenue dependent on uptime</small>
+        </div>
+        <input type="range" id="revenueAtRisk" class="range-slider" min="100000" max="10000000" step="100000" value="1000000">
+        <div class="range-value" id="revenueDisplay">$1,000,000</div>
+      </div>
+      
+      <div class="input-divider"></div>
+      
+      <div class="range-input-group">
+        <div class="input-group">
+          <label>Infrastructure Complexity</label>
+          <small>Number of platforms / integrations</small>
+        </div>
+        <input type="range" id="complexity" class="range-slider" min="1" max="15" step="1" value="4">
+        <div class="range-value" id="complexityDisplay">4 platforms</div>
+      </div>
+      
+      <div class="input-divider"></div>
+      
+      <div class="input-group">
+        <label>Current Annual Security Spend</label>
+        <small>Tools, licenses, internal staff</small>
+        <input type="number" id="currentSpend" placeholder="50000" value="50000" min="0" step="5000">
+      </div>
+      
+      <div class="input-divider"></div>
+      
+      <div class="input-group">
+        <label>Security Team Size (FTE)</label>
+        <small>Full-time equivalents dedicated to security</small>
+        <input type="number" id="teamSize" placeholder="1.5" value="1.5" min="0" step="0.5">
+      </div>
+      
+      <div class="input-divider"></div>
+      
+      <div class="range-input-group">
+        <div class="input-group">
+          <label>Average Cost Per Security Incident</label>
+          <small>Estimated cost of incident response + recovery</small>
+        </div>
+        <input type="range" id="incidentCost" class="range-slider" min="10000" max="500000" step="10000" value="100000">
+        <div class="range-value" id="incidentCostDisplay">$100,000</div>
+      </div>
+    </div>
+    
+    <!-- Results -->
+    <div class="calc-results">
+      <div>
+        <div class="result-box">
+          <div class="result-label">Estimated 12-Month Cost Reduction</div>
+          <div class="result-value" id="costReduction">$125,000</div>
+          <div class="result-subtext">Through incident prevention & efficiency</div>
+        </div>
+        
+        <div class="result-box">
+          <div class="result-label">Managed Services Investment</div>
+          <div class="result-value" id="serviceCost">$72,000</div>
+          <div class="result-subtext">Estimated annual engagement</div>
+        </div>
+        
+        <div class="result-box">
+          <div class="result-label" style="color: var(--teal);">Net ROI (Year 1)</div>
+          <div class="result-value" style="background: linear-gradient(90deg, var(--teal), var(--blue-lt)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="roi">+$53,000</div>
+          <div class="result-subtext">Plus ongoing risk mitigation</div>
+        </div>
+      </div>
+      
+      <div class="breakdown-section">
+        <h4>Annual Value Breakdown</h4>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Incident Prevention (est.)</span>
+          <span class="breakdown-value" id="breakIncident">$75,000</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Operational Efficiency (est.)</span>
+          <span class="breakdown-value" id="breakEfficiency">$50,000</span>
+        </div>
+        <div class="breakdown-item">
+          <span class="breakdown-label">Internal Staff Reallocation (est.)</span>
+          <span class="breakdown-value" id="breakRealloc">$35,000</span>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+        <p>These estimates are based on industry benchmarks. <strong>Schedule a consultation for a personalized ROI analysis</strong> tailored to your specific infrastructure and threat landscape.</p>
+        <a href="/contact/" class="btn-primary">Get Personalized Estimate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="roi-methodology">
+  <div class="methodology-inner">
+    <h2 class="sec-title">How we calculate<br /><span class="grad">your ROI</span></h2>
+    
+    <div class="methodology-grid">
+      <div class="methodology-card">
+        <div class="methodology-icon">🛡️</div>
+        <h4>Incident Prevention</h4>
+        <p>We estimate prevented incidents based on typical attack patterns and the security controls deployed. Each prevented incident saves significant response and recovery costs.</p>
+      </div>
+      
+      <div class="methodology-card">
+        <div class="methodology-icon">⚙️</div>
+        <h4>Operational Efficiency</h4>
+        <p>Time saved through automated monitoring, alert triage, and policy tuning. Your internal team redirects focus to strategic initiatives instead of firefighting.</p>
+      </div>
+      
+      <div class="methodology-card">
+        <div class="methodology-icon">👥</div>
+        <h4>Staff Cost Optimization</h4>
+        <p>Reduction in on-call burden, overtime, and hiring pressure. Managed services reduce FTE requirements while maintaining 24×7 coverage and SLA guarantees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const revenueInput = document.getElementById('revenueAtRisk');
+const complexityInput = document.getElementById('complexity');
+const currentSpendInput = document.getElementById('currentSpend');
+const teamSizeInput = document.getElementById('teamSize');
+const incidentCostInput = document.getElementById('incidentCost');
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(value);
+}
+
+function updateCalculator() {
+  const revenue = parseInt(revenueInput.value);
+  const complexity = parseInt(complexityInput.value);
+  const currentSpend = parseInt(currentSpendInput.value);
+  const teamSize = parseFloat(teamSizeInput.value);
+  const incidentCost = parseInt(incidentCostInput.value);
+  
+  // Update display values
+  document.getElementById('revenueDisplay').textContent = formatCurrency(revenue);
+  document.getElementById('complexityDisplay').textContent = complexity + ' platform' + (complexity === 1 ? '' : 's');
+  document.getElementById('incidentCostDisplay').textContent = formatCurrency(incidentCost);
+  
+  // Calculate ROI components
+  // Incident Prevention: Assume 2-3 incidents prevented per year based on complexity
+  const incidentsPreventedRate = Math.min(complexity * 0.5, 3);
+  const incidentPrevention = incidentsPreventedRate * incidentCost * 0.7; // 70% of incident cost avoided
+  
+  // Operational Efficiency: Time savings from automation & monitoring
+  const efficiencyPercentage = Math.min(0.3, 0.15 + (complexity * 0.03)); // 15-45% efficiency gain
+  const operationalEfficiency = currentSpend * efficiencyPercentage;
+  
+  // Staff Cost Reallocation: Reduce FTE need by 30-50%
+  const staffCostPerFTE = 100000; // Average security engineer cost
+  const staffReallocation = teamSize * staffCostPerFTE * 0.35;
+  
+  // Total value
+  const totalValue = incidentPrevention + operationalEfficiency + staffReallocation;
+  
+  // Managed services cost estimate
+  const baseCost = 36000; // Base annual cost
+  const perPlatformCost = 12000; // Per platform/integration
+  const serviceCost = baseCost + (complexity * perPlatformCost);
+  
+  // Net ROI
+  const netROI = totalValue - serviceCost;
+  
+  // Update display
+  document.getElementById('costReduction').textContent = formatCurrency(totalValue);
+  document.getElementById('serviceCost').textContent = formatCurrency(serviceCost);
+  document.getElementById('roi').textContent = (netROI > 0 ? '+' : '') + formatCurrency(netROI);
+  
+  document.getElementById('breakIncident').textContent = formatCurrency(incidentPrevention);
+  document.getElementById('breakEfficiency').textContent = formatCurrency(operationalEfficiency);
+  document.getElementById('breakRealloc').textContent = formatCurrency(staffReallocation);
+}
+
+revenueInput.addEventListener('input', updateCalculator);
+complexityInput.addEventListener('input', updateCalculator);
+currentSpendInput.addEventListener('input', updateCalculator);
+teamSizeInput.addEventListener('input', updateCalculator);
+incidentCostInput.addEventListener('input', updateCalculator);
+
+// Initial calculation
+updateCalculator();
+</script>
