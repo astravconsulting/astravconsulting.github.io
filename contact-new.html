@@ -1,0 +1,472 @@
+---
+title: Contact Astrav Consulting
+description: Get in touch with our security consulting team
+layout: default
+---
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT PAGE STYLES
+═══════════════════════════════════════════════════════════════ */
+#contact-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.contact-hero-content h1 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.contact-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT FORM SECTION
+═══════════════════════════════════════════════════════════════ */
+#contact-form-section {
+  padding: 5rem 2rem;
+  background: var(--navy2);
+}
+
+.contact-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-info h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.contact-info p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.contact-method {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: background 0.3s;
+}
+
+.contact-method:hover {
+  background: var(--panel);
+}
+
+.contact-method-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.contact-method h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.contact-method p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.contact-method a {
+  color: var(--blue-lt);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.contact-method a:hover {
+  color: var(--teal);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENHANCED FORM
+═══════════════════════════════════════════════════════════════ */
+.contact-form {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.form-group small {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: rgba(26,111,255,0.5);
+  background: rgba(255,255,255,0.08);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  margin: 0;
+}
+
+.segmentation-group {
+  background: rgba(26,111,255,0.05);
+  border: 1px solid rgba(26,111,255,0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.segmentation-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blue-lt);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.segmentation-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.radio-option:hover {
+  background: rgba(26,111,255,0.1);
+  border-color: rgba(26,111,255,0.3);
+}
+
+.radio-option input[type="radio"] {
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.radio-option label {
+  cursor: pointer;
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--off-white);
+}
+
+.form-submit {
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.875rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: inherit;
+  margin-top: 0.5rem;
+}
+
+.form-submit:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 24px rgba(26,111,255,0.4);
+  transform: translateY(-2px);
+}
+
+.form-submit:disabled {
+  background: rgba(26,111,255,0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.form-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #contact-hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .segmentation-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  #contact-form-section {
+    padding: 4rem 1.5rem;
+  }
+}
+</style>
+
+<!-- HERO -->
+<section id="contact-hero">
+  <div class="orb orb-1"></div>
+  <div class="hero-grid"></div>
+  <img src="logo.png" alt="" class="hero-logo-watermark" aria-hidden="true" />
+  
+  <div class="contact-hero-content">
+    <h1>Let's secure your<br /><span class="grad">infrastructure</span></h1>
+    <p class="contact-sub">
+      Talk to an Astrav security expert. Whether you're starting fresh, optimizing existing security, or need ongoing management — we're ready to help.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="contact-form-section">
+  <div class="contact-container">
+    <!-- Left: Info -->
+    <div class="contact-info">
+      <div>
+        <h2>Get in Touch</h2>
+        <p>Fill out the form and we'll get back to you within 24 hours. Or reach out directly:</p>
+      </div>
+      
+      <div class="contact-method">
+        <div class="contact-method-icon">📧</div>
+        <h4>Email</h4>
+        <p><a href="mailto:hello@astravconsulting.com">hello@astravconsulting.com</a></p>
+      </div>
+      
+      <div class="contact-method">
+        <div class="contact-method-icon">🐦</div>
+        <h4>Social</h4>
+        <p><a href="https://twitter.com/OfficialAstrav" target="_blank">@OfficialAstrav on Twitter</a></p>
+      </div>
+      
+      <div class="contact-method">
+        <div class="contact-method-icon">📋</div>
+        <h4>Quick Tools</h4>
+        <p>
+          Not ready to talk? Try our <a href="/tools/risk-assessment.html">risk assessment</a> or <a href="/tools/roi-calculator.html">ROI calculator</a> first.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Right: Form -->
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="company">Company *</label>
+          <input type="text" id="company" name="company" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+      
+      <!-- Segmentation: What are you interested in? -->
+      <div class="segmentation-group">
+        <label>What brings you here? *</label>
+        <div class="segmentation-options">
+          <div class="radio-option">
+            <input type="radio" id="interest_assessment" name="interest" value="security_assessment" required>
+            <label for="interest_assessment">Security Assessment</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="interest_managed" name="interest" value="managed_services" required>
+            <label for="interest_managed">Managed Services</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="interest_implementation" name="interest" value="implementation" required>
+            <label for="interest_implementation">Implementation Project</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="interest_consulting" name="interest" value="consulting" required>
+            <label for="interest_consulting">General Consulting</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Segmentation: Platform Focus -->
+      <div class="segmentation-group">
+        <label>What's your primary platform focus?</label>
+        <div class="segmentation-options">
+          <div class="radio-option">
+            <input type="radio" id="platform_akamai" name="platform" value="akamai">
+            <label for="platform_akamai">Akamai</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_cloudflare" name="platform" value="cloudflare">
+            <label for="platform_cloudflare">Cloudflare</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_aws" name="platform" value="aws">
+            <label for="platform_aws">AWS / CloudFront</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="platform_multi" name="platform" value="multi">
+            <label for="platform_multi">Multiple Platforms</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Message -->
+      <div class="form-group">
+        <label for="message">Tell us about your project *</label>
+        <small>What are your main security challenges or goals?</small>
+        <textarea id="message" name="message" required placeholder="E.g., We need to implement WAF across our CDN infrastructure..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="updates" value="yes">
+          I'd like to receive updates about CDN & cloud security
+        </label>
+      </div>
+      
+      <button type="submit" class="form-submit">Schedule a Consultation</button>
+      <p class="form-note">We'll review your information and get back to you within 24 hours.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+  const data = {
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
+    email: formData.get('email'),
+    company: formData.get('company'),
+    phone: formData.get('phone'),
+    interest: formData.get('interest'),
+    platform: formData.get('platform'),
+    message: formData.get('message'),
+    updates: formData.get('updates'),
+    timestamp: new Date().toISOString()
+  };
+  
+  // Log for demonstration (in production, send to backend)
+  console.log('Form submitted:', data);
+  
+  // Show success message
+  alert(`Thank you, ${data.firstName}! We'll reach out to you at ${data.email} within 24 hours.`);
+  this.reset();
+});
+</script>
